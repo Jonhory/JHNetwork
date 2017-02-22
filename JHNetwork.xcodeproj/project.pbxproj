@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A84570F6DF3508E0300DBC7 /* Pods_JHNetworkUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13CEFDD2914150DC7136A87A /* Pods_JHNetworkUITests.framework */; };
-		BAE3A485EDE8EBC7B2647613 /* Pods_JHNetworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0FCCE5716EC05AE1880E983 /* Pods_JHNetworkTests.framework */; };
 		BB7803321E5C735A00A5920B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803311E5C735A00A5920B /* AppDelegate.swift */; };
 		BB7803341E5C735A00A5920B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803331E5C735A00A5920B /* ViewController.swift */; };
 		BB7803371E5C735A00A5920B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB7803351E5C735A00A5920B /* Main.storyboard */; };
@@ -17,7 +15,6 @@
 		BB7803471E5C735A00A5920B /* JHNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803461E5C735A00A5920B /* JHNetworkTests.swift */; };
 		BB7803521E5C735A00A5920B /* JHNetworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803511E5C735A00A5920B /* JHNetworkUITests.swift */; };
 		BB7803611E5C73E800A5920B /* JHNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803601E5C73E800A5920B /* JHNetwork.swift */; };
-		BB7803651E5C812600A5920B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7803641E5C812600A5920B /* Alamofire.framework */; };
 		E316A6943CEBE0BF6CAE9179 /* Pods_JHNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8039C95E33E4C812C80851F4 /* Pods_JHNetwork.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,14 +35,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BBAAB1781E5DE29F00E7C8D5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		13CEFDD2914150DC7136A87A /* Pods_JHNetworkUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JHNetworkUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EA556AB8DFDE2932171CD0A /* Pods-JHNetworkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHNetworkTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JHNetworkTests/Pods-JHNetworkTests.debug.xcconfig"; sourceTree = "<group>"; };
-		55ED488D2EADBB6D2CA09685 /* Pods-JHNetworkUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHNetworkUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JHNetworkUITests/Pods-JHNetworkUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8039C95E33E4C812C80851F4 /* Pods_JHNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JHNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E9B3EF3EA2822EA1F93CF7 /* Pods-JHNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHNetwork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JHNetwork/Pods-JHNetwork.debug.xcconfig"; sourceTree = "<group>"; };
 		A132FC577B0133B0341A4B8D /* Pods-JHNetwork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHNetwork.release.xcconfig"; path = "Pods/Target Support Files/Pods-JHNetwork/Pods-JHNetwork.release.xcconfig"; sourceTree = "<group>"; };
-		A7E365BB411452050A9615CB /* Pods-JHNetworkUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHNetworkUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JHNetworkUITests/Pods-JHNetworkUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BB78032E1E5C735A00A5920B /* JHNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JHNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB7803311E5C735A00A5920B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB7803331E5C735A00A5920B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,7 +69,6 @@
 		BB7803601E5C73E800A5920B /* JHNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHNetwork.swift; sourceTree = "<group>"; };
 		BB7803641E5C812600A5920B /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		D0FCCE5716EC05AE1880E983 /* Pods_JHNetworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JHNetworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF72DF30EEBF8716EBD1AA4D /* Pods-JHNetworkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHNetworkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JHNetworkTests/Pods-JHNetworkTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB7803651E5C812600A5920B /* Alamofire.framework in Frameworks */,
 				E316A6943CEBE0BF6CAE9179 /* Pods_JHNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,7 +84,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAE3A485EDE8EBC7B2647613 /* Pods_JHNetworkTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,7 +91,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A84570F6DF3508E0300DBC7 /* Pods_JHNetworkUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,10 +102,6 @@
 			children = (
 				92E9B3EF3EA2822EA1F93CF7 /* Pods-JHNetwork.debug.xcconfig */,
 				A132FC577B0133B0341A4B8D /* Pods-JHNetwork.release.xcconfig */,
-				2EA556AB8DFDE2932171CD0A /* Pods-JHNetworkTests.debug.xcconfig */,
-				EF72DF30EEBF8716EBD1AA4D /* Pods-JHNetworkTests.release.xcconfig */,
-				55ED488D2EADBB6D2CA09685 /* Pods-JHNetworkUITests.debug.xcconfig */,
-				A7E365BB411452050A9615CB /* Pods-JHNetworkUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -135,9 +134,9 @@
 				BB78035F1E5C73DD00A5920B /* JHNetwork */,
 				BB7803311E5C735A00A5920B /* AppDelegate.swift */,
 				BB7803331E5C735A00A5920B /* ViewController.swift */,
-				BB7803351E5C735A00A5920B /* Main.storyboard */,
 				BB7803381E5C735A00A5920B /* Assets.xcassets */,
 				BB78033A1E5C735A00A5920B /* LaunchScreen.storyboard */,
+				BB7803351E5C735A00A5920B /* Main.storyboard */,
 				BB78033D1E5C735A00A5920B /* Info.plist */,
 			);
 			path = JHNetwork;
@@ -193,6 +192,7 @@
 				BB78032C1E5C735A00A5920B /* Resources */,
 				985A740B1EE535A10ADC2776 /* [CP] Embed Pods Frameworks */,
 				1779E71E3E7C96B376E5C78E /* [CP] Copy Pods Resources */,
+				BBAAB1781E5DE29F00E7C8D5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -207,12 +207,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BB7803591E5C735A00A5920B /* Build configuration list for PBXNativeTarget "JHNetworkTests" */;
 			buildPhases = (
-				36A3D206F7379C5CF8D98B9B /* [CP] Check Pods Manifest.lock */,
 				BB78033E1E5C735A00A5920B /* Sources */,
 				BB78033F1E5C735A00A5920B /* Frameworks */,
 				BB7803401E5C735A00A5920B /* Resources */,
-				46C94E59BDEE894272A866F7 /* [CP] Embed Pods Frameworks */,
-				3EE420341A4504CABB6E0ABB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -228,12 +225,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BB78035C1E5C735A00A5920B /* Build configuration list for PBXNativeTarget "JHNetworkUITests" */;
 			buildPhases = (
-				D391D9A9246C17765D774669 /* [CP] Check Pods Manifest.lock */,
 				BB7803491E5C735A00A5920B /* Sources */,
 				BB78034A1E5C735A00A5920B /* Frameworks */,
 				BB78034B1E5C735A00A5920B /* Resources */,
-				953F6B2B9A707F650C9EB15E /* [CP] Embed Pods Frameworks */,
-				9385D266862E0D21FE23D3A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -334,51 +328,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JHNetwork/Pods-JHNetwork-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		36A3D206F7379C5CF8D98B9B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		3EE420341A4504CABB6E0ABB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JHNetworkTests/Pods-JHNetworkTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		46C94E59BDEE894272A866F7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JHNetworkTests/Pods-JHNetworkTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7380D707F4F8EFB8229E5F2B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -394,36 +343,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		9385D266862E0D21FE23D3A0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JHNetworkUITests/Pods-JHNetworkUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		953F6B2B9A707F650C9EB15E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JHNetworkUITests/Pods-JHNetworkUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		985A740B1EE535A10ADC2776 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -437,21 +356,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JHNetwork/Pods-JHNetwork-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D391D9A9246C17765D774669 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -647,7 +551,6 @@
 		};
 		BB78035A1E5C735A00A5920B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2EA556AB8DFDE2932171CD0A /* Pods-JHNetworkTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -662,7 +565,6 @@
 		};
 		BB78035B1E5C735A00A5920B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF72DF30EEBF8716EBD1AA4D /* Pods-JHNetworkTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -677,7 +579,6 @@
 		};
 		BB78035D1E5C735A00A5920B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55ED488D2EADBB6D2CA09685 /* Pods-JHNetworkUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = JHNetworkUITests/Info.plist;
@@ -691,7 +592,6 @@
 		};
 		BB78035E1E5C735A00A5920B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7E365BB411452050A9615CB /* Pods-JHNetworkUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = JHNetworkUITests/Info.plist;

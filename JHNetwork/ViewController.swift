@@ -8,29 +8,38 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let net = JHNetwork.shared
-        NSLog("net = \(net)")
-        
-        Alamofire.request("https://httpbin.org/get").responseJSON { response in
-            print("\n\n gogoogog === ")
-            print(response.request)  // original URL request
-            print(response.response) // HTTP URL response
-            print(response.data)     // server data
-            print(response.result)   // result of response serialization
-            
-            if let JSON = response.result.value {
-                print("JSON: \(JSON)")
+        JHNetwork.shared.getWithUrl(url: "http://www.weather.com.cn/data/sk/101190408.html", success: { (DefaultDataResponse) in
+            print(DefaultDataResponse)
+            if let value = DefaultDataResponse.result.value {
+                let weatherinfo = JSON(value)
+                if let info = weatherinfo["weatherinfo"].dictionary{
+                    for (key,value):(String,JSON) in info {
+                        print(key , "+ : +" ,value)
+                    }
+                }
+
             }
+        }) { (error) in
+            
         }
-    
-        Alamofire.request("https://httpbin.org/get").response { (response) in
-            debugPrint("AAAA \n BBBBB == ",response)
+        
+        /* 基础的请求 及JSON数据解析 */
+        Alamofire.request("https://api.500px.com/v1/photos").responseJSON { (DataResponse) in
+            
+            if let Json = DataResponse.result.value{
+                print("Json:\(Json) ")
+                // NSData->NSDictonary
+                let dic = try? JSONSerialization.jsonObject(with: DataResponse.data!, options: JSONSerialization.ReadingOptions.allowFragments) as! [String: Any]
+                let status = dic? ["status"]
+                print("status is \(status)")
+            }
         }
     }
 
