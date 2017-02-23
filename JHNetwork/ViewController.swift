@@ -15,32 +15,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        JHNetwork.shared.getWithUrl(url: "http://www.weather.com.cn/data/sk/101190408.html", success: { (DefaultDataResponse) in
-            print(DefaultDataResponse)
-            if let value = DefaultDataResponse.result.value {
-                let weatherinfo = JSON(value)
-                if let info = weatherinfo["weatherinfo"].dictionary{
-                    for (key,value):(String,JSON) in info {
-                        print(key , "+ : +" ,value)
-                    }
-                }
-
-            }
-        }) { (error) in
-            
+        let url2 = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=218.4.255.255"
+        JHNetwork.shared.requestData(methodType: .GET, urlStr: url2, refreshCache: true, parameters: nil) { (result, error) in
+            print("1 => ",result ?? "result == nil")
+            print("\n")
+            print(error ?? "error == nil")
         }
         
-        /* 基础的请求 及JSON数据解析 */
-        Alamofire.request("https://api.500px.com/v1/photos").responseJSON { (DataResponse) in
-            
-            if let Json = DataResponse.result.value{
-                print("Json:\(Json) ")
-                // NSData->NSDictonary
-                let dic = try? JSONSerialization.jsonObject(with: DataResponse.data!, options: JSONSerialization.ReadingOptions.allowFragments) as! [String: Any]
-                let status = dic? ["status"]
-                print("status is \(status)")
-            }
+        JHNetwork.shared.postData(urlString: url2) { (result, error) in
+            print("2 => ",result ?? "result == nil")
+            print("\n")
+            print(error ?? "error == nil")
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
