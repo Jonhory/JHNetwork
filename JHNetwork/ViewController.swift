@@ -22,7 +22,8 @@ class ViewController: UIViewController {
             print(error ?? "error == nil")
         }
         
-        JHNetwork.shared.postData(urlString: url2) { (result, error) in
+        let url3 = "http://ip.taobao.com/service/getIpInfo.php?ip=63.223.108.42"
+        JHNetwork.shared.postData(urlString: url3) { (result, error) in
             print("2 => ",result ?? "result == nil")
             print("\n")
             print(error ?? "error == nil")
