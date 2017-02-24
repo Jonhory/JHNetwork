@@ -27,29 +27,29 @@ class JHNetwork{
 extension JHNetwork{
   
     //MARK:GET
-    func getData(urlString:String,finished:@escaping networkJSON) {
-        getData(urlString: urlString, parameters: nil, finished: finished)
+    func getData(url:String,finished:@escaping networkJSON) {
+        getData(url: url, parameters: nil, finished: finished)
     }
     
-    func getData(urlString:String,parameters:[String :AnyObject]?,finished:@escaping networkJSON) {
-        getData(urlString: urlString, refreshCache: true, parameters: parameters, finished: finished)
+    func getData(url:String,parameters:[String :AnyObject]?,finished:@escaping networkJSON) {
+        getData(url: url, refreshCache: true, parameters: parameters, finished: finished)
     }
     
-    func getData(urlString:String,refreshCache:Bool,parameters:[String :AnyObject]?,finished:@escaping networkJSON) {
-        requestData(methodType: .GET, urlStr: urlString, refreshCache: refreshCache, parameters: parameters, finished: finished)
+    func getData(url:String,refreshCache:Bool,parameters:[String :AnyObject]?,finished:@escaping networkJSON) {
+        requestData(methodType: .GET, urlStr: url, refreshCache: refreshCache, parameters: parameters, finished: finished)
     }
     
     //MARK:POST
-    func postData(urlString:String,finished:@escaping networkJSON) {
-        postData(urlString: urlString, parameters: nil, finished: finished)
+    func postData(url:String,finished:@escaping networkJSON) {
+        postData(url: url, parameters: nil, finished: finished)
     }
     
-    func postData(urlString:String,parameters:[String :AnyObject]?,finished:@escaping networkJSON) {
-        postData(urlString: urlString, refreshCache: true, parameters: parameters, finished: finished)
+    func postData(url:String,parameters:[String :AnyObject]?,finished:@escaping networkJSON) {
+        postData(url: url, refreshCache: true, parameters: parameters, finished: finished)
     }
     
-    func postData(urlString:String,refreshCache:Bool,parameters:[String :AnyObject]?,finished:@escaping networkJSON) {
-        requestData(methodType: .POST, urlStr: urlString, refreshCache: refreshCache, parameters: parameters, finished: finished)
+    func postData(url:String,refreshCache:Bool,parameters:[String :AnyObject]?,finished:@escaping networkJSON) {
+        requestData(methodType: .POST, urlStr: url, refreshCache: refreshCache, parameters: parameters, finished: finished)
     }
     
     //MARK:请求JSON数据最底层
