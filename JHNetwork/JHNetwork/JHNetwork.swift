@@ -36,10 +36,6 @@ class JHNetwork{
     var httpHeader:HTTPHeaders? = nil
     /// 是否自动ecode
     var autoEncode = false
-    /// 是否缓存get请求回调
-    var cacheGet = true
-    /// 是否缓存post请求回调
-    var cachePost = true
     /// 取消请求时，是否返回失败回调
     var shouldCallbackOnCancelRequest = false
     /// 网络异常时，是否从本地提取数据
@@ -57,7 +53,7 @@ class JHNetwork{
     /// - Parameter shouldObtain: 是否从本地提取数据
     func shoulObtainLocalWhenUnconnected(shouldObtain:Bool) {
         shoulObtainLocalWhenUnconnected = shouldObtain
-        if shouldObtain && (cacheGet || cachePost) {
+        if shouldObtain {
             listenNetworkReachabilityStatus {_ in }
         }
     }
@@ -101,42 +97,42 @@ extension JHNetwork {
 extension JHNetwork{
   
     //MARK:GET
-    func getData(url:String,finished:@escaping networkJSON) {
+    func getData(url: String, finished: @escaping networkJSON) {
         getData(url: url, parameters: nil, finished: finished)
     }
     
-    func getData(url:String,parameters:[String :Any]?,finished:@escaping networkJSON) {
+    func getData(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
         getData(url: url, refreshCache: true, parameters: parameters, finished: finished)
     }
     
-    func getData(url:String,refreshCache:Bool,parameters:[String :Any]?,finished:@escaping networkJSON) {
-        requestData(methodType: .GET, urlStr: url, refreshCache: refreshCache, parameters: parameters, finished: finished)
+    func getData(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        requestData(methodType: .GET, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
     }
     
     //MARK:POST
-    func postData(url:String,finished:@escaping networkJSON) {
+    func postData(url: String, finished: @escaping networkJSON) {
         postData(url: url, parameters: nil, finished: finished)
     }
     
-    func postData(url:String,parameters:[String :Any]?,finished:@escaping networkJSON) {
+    func postData(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
         postData(url: url, refreshCache: true, parameters: parameters, finished: finished)
     }
     
-    func postData(url:String,refreshCache:Bool,parameters:[String :Any]?,finished:@escaping networkJSON) {
-        requestData(methodType: .POST, urlStr: url, refreshCache: refreshCache, parameters: parameters, finished: finished)
+    func postData(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        requestData(methodType: .POST, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
     }
     
     //MARK:请求JSON数据最底层
-    func requestData(methodType:RequestType,urlStr:String,refreshCache:Bool,parameters:[String :Any]?,finished:@escaping networkJSON){
+    func requestData(methodType: RequestType, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, finished: @escaping networkJSON){
         //1.定义请求结果回调闭包
         let resultCallBack = { (response: DataResponse<Any>)in
             if response.result.isSuccess{
                 let value = response.result.value as Any?
                 let js = JSON(value as Any)
-                finished(js,nil)
+                finished(js, nil)
                 self.cacheResponse(response: js, url: urlStr, parameters: parameters)
             }else{
-                finished(nil,response.result.error as NSError?)
+                finished(nil, response.result.error as NSError?)
             }
         }
         let config = URLSessionConfiguration.default
@@ -144,7 +140,7 @@ extension JHNetwork{
         manager = Alamofire.SessionManager(configuration: config)
         //2.请求数据
         let httpMethod:HTTPMethod = methodType == .GET ? .get : .post
-        manager.request(urlStr,method:httpMethod,parameters:parameters,encoding:URLEncoding.default,headers:httpHeader).responseJSON(completionHandler:resultCallBack)
+        manager.request(urlStr, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
         
     }
     
@@ -154,7 +150,7 @@ extension JHNetwork{
     ///   - url: 完整的url
     ///   - params: 参数字典
     /// - Returns: GET形式的字符串
-    func generateGETAbsoluteURL(url:String,params:[String:Any]?) -> String{
+    func generateGETAbsoluteURL(url: String, params: [String:Any]?) -> String{
         var absoluteUrl = ""
         
         if params != nil {
@@ -182,7 +178,7 @@ extension JHNetwork{
     ///   - response: 网络回调JSON数据
     ///   - url: 外部传入的接口
     ///   - parameters: 外部传入的参数
-    func cacheResponse(response:JSON?,url:String,parameters:[String :Any]?) {
+    func cacheResponse(response: JSON?, url: String, parameters: [String :Any]?) {
         if response != nil {
             let directoryPath = cachePath()
             if !FileManager.default.fileExists(atPath: directoryPath) {
@@ -218,7 +214,7 @@ extension JHNetwork{
     ///   - url: 外部接口
     ///   - parameters: 参数字典
     /// - Returns: 缓存的JSON数据
-    func getCacheResponseWithURL(url:String,parameters:[String :Any]?) -> JSON? {
+    func getCacheResponseWithURL(url: String, parameters: [String :Any]?) -> JSON? {
         var json:JSON? = nil
         let directoryPath = cachePath()
         let absolute = absoluteUrlWithPath(path: url)
@@ -238,7 +234,7 @@ extension JHNetwork{
     ///
     /// - Parameter path: 接口路径
     /// - Returns: 完整的接口url
-    func absoluteUrlWithPath(path:String?) -> String {
+    func absoluteUrlWithPath(path: String?) -> String {
         if path == nil || path?.characters.count == 0 {
             return ""
         }
@@ -271,7 +267,7 @@ extension JHNetwork{
     ///
     /// - Parameter params: 外部传入的参数字典
     /// - Returns: 添加默认key／value的字典
-    func appendDefaultParameter(params:[String:Any]?) -> [String:Any]? {
+    func appendDefaultParameter(params: [String:Any]?) -> [String:Any]? {
         var par = params
         par?["version"] = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         return par
