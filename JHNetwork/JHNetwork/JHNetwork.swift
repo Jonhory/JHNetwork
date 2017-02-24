@@ -20,12 +20,11 @@ class JHNetwork{
     static let shared = JHNetwork()
     private init() {}
     
-
-    
     /// 普通网络回调
     typealias networkResponse = (_ result:Any?,_ error:NSError?) -> ()
     /// JSON数据回调
     typealias networkJSON = (_ result:JSON?,_ error:NSError?) -> ()
+    /// 网络状态监听回调
     typealias networkListen = (_ status:NetworkReachabilityManager.NetworkReachabilityStatus) -> Void
     
     /// 网络基础url
@@ -86,9 +85,8 @@ extension JHNetwork {
         listen?.startListening()
         listen?.listener = { status in
             self.networkStatus = status
-            
-//            print("*** <<<Network Status Changed>>> ***:\(status)")
-//            networkListen(status)
+            print("*** <<<Network Status Changed>>> ***:\(status)")
+            networkListen(status)
         }
     }
 }
@@ -96,7 +94,7 @@ extension JHNetwork {
 // MARK: - 网络请求相关
 extension JHNetwork{
   
-    //MARK:GET
+    //MARK:缓存GET
     func getData(url: String, finished: @escaping networkJSON) {
         getData(url: url, parameters: nil, finished: finished)
     }
@@ -109,7 +107,20 @@ extension JHNetwork{
         requestData(methodType: .GET, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
     }
     
-    //MARK:POST
+    //MARK:不缓存GET
+    func getNoCacheData(url: String, finished: @escaping networkJSON) {
+        getNoCacheData(url: url, parameters: nil, finished: finished)
+    }
+    
+    func getNoCacheData(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        getNoCacheData(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    }
+    
+    func getNoCacheData(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        requestData(methodType: .GET, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, finished: finished)
+    }
+    
+    //MARK:缓存POST
     func postData(url: String, finished: @escaping networkJSON) {
         postData(url: url, parameters: nil, finished: finished)
     }
@@ -122,27 +133,67 @@ extension JHNetwork{
         requestData(methodType: .POST, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
     }
     
+    //MARK:不缓存POST
+    func postNoCacheData(url: String, finished: @escaping networkJSON) {
+        postNoCacheData(url: url, parameters: nil, finished: finished)
+    }
+    
+    func postNoCacheData(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        postNoCacheData(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    }
+    
+    func postNoCacheData(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        requestData(methodType: .POST, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, finished: finished)
+    }
+    
     //MARK:请求JSON数据最底层
+    
+    /// 请求JSON数据最底层
+    ///
+    /// - Parameters:
+    ///   - methodType: GET/POST
+    ///   - urlStr: 接口
+    ///   - refreshCache: 是否刷新缓存,如果为false则返回缓存
+    ///   - isCache: 是否缓存
+    ///   - parameters: 参数字典
+    ///   - finished: 回调
     func requestData(methodType: RequestType, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, finished: @escaping networkJSON){
+        
+        //如果不刷新缓存，如果已存在缓存，则返回缓存，否则请求网络，但是不缓存数据
+        if !refreshCache {
+            let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
+            if js != nil {
+                finished(js, nil)
+                return
+            }
+        }
+        
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = TimeInterval(timeout)
+        manager = Alamofire.SessionManager(configuration: config)
+        let absolute = absoluteUrlWithPath(path: urlStr)
+        
         //1.定义请求结果回调闭包
         let resultCallBack = { (response: DataResponse<Any>)in
             if response.result.isSuccess{
                 let value = response.result.value as Any?
                 let js = JSON(value as Any)
                 finished(js, nil)
-                self.cacheResponse(response: js, url: urlStr, parameters: parameters)
+                // 如果刷新缓存并且缓存
+                if refreshCache && isCache {
+                    self.cacheResponse(response: js, url: urlStr, parameters: parameters)
+                }
             }else{
                 finished(nil, response.result.error as NSError?)
             }
         }
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = TimeInterval(timeout)
-        manager = Alamofire.SessionManager(configuration: config)
         //2.请求数据
         let httpMethod:HTTPMethod = methodType == .GET ? .get : .post
-        manager.request(urlStr, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
+        manager.request(absolute, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
         
     }
+    
+    //MARK: 私有方法
     
     /// 将传入的参数字典转成字符串用于显示和判断唯一性，仅对一级字典结构有效
     ///
@@ -150,7 +201,7 @@ extension JHNetwork{
     ///   - url: 完整的url
     ///   - params: 参数字典
     /// - Returns: GET形式的字符串
-    func generateGETAbsoluteURL(url: String, params: [String:Any]?) -> String{
+    private func generateGETAbsoluteURL(url: String, params: [String:Any]?) -> String{
         var absoluteUrl = ""
         
         if params != nil {
@@ -178,7 +229,7 @@ extension JHNetwork{
     ///   - response: 网络回调JSON数据
     ///   - url: 外部传入的接口
     ///   - parameters: 外部传入的参数
-    func cacheResponse(response: JSON?, url: String, parameters: [String :Any]?) {
+    private func cacheResponse(response: JSON?, url: String, parameters: [String :Any]?) {
         if response != nil {
             let directoryPath = cachePath()
             if !FileManager.default.fileExists(atPath: directoryPath) {
@@ -214,7 +265,7 @@ extension JHNetwork{
     ///   - url: 外部接口
     ///   - parameters: 参数字典
     /// - Returns: 缓存的JSON数据
-    func getCacheResponseWithURL(url: String, parameters: [String :Any]?) -> JSON? {
+    private func getCacheResponseWithURL(url: String, parameters: [String :Any]?) -> JSON? {
         var json:JSON? = nil
         let directoryPath = cachePath()
         let absolute = absoluteUrlWithPath(path: url)
@@ -234,7 +285,7 @@ extension JHNetwork{
     ///
     /// - Parameter path: 接口路径
     /// - Returns: 完整的接口url
-    func absoluteUrlWithPath(path: String?) -> String {
+    private func absoluteUrlWithPath(path: String?) -> String {
         if path == nil || path?.characters.count == 0 {
             return ""
         }
@@ -267,7 +318,7 @@ extension JHNetwork{
     ///
     /// - Parameter params: 外部传入的参数字典
     /// - Returns: 添加默认key／value的字典
-    func appendDefaultParameter(params: [String:Any]?) -> [String:Any]? {
+    private func appendDefaultParameter(params: [String:Any]?) -> [String:Any]? {
         var par = params
         par?["version"] = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         return par
