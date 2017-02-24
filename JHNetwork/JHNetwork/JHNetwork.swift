@@ -30,6 +30,10 @@ class JHNetwork{
     
     /// 网络基础url
     var baseUrl:String? = nil
+    /// 请求超时
+    var timeout = 15
+    ///配置公共请求头
+    var httpHeader:HTTPHeaders? = nil
     /// 是否自动ecode
     var autoEncode = false
     /// 是否缓存get请求回调
@@ -38,10 +42,9 @@ class JHNetwork{
     var cachePost = true
     /// 取消请求时，是否返回失败回调
     var shouldCallbackOnCancelRequest = false
-    /// 请求超时
-    var timeout = 15
     /// 网络异常时，是否从本地提取数据
     private var shoulObtainLocalWhenUnconnected = true
+    
     /// 当前网络状态，默认WIFI，开启网络状态监听后有效
     var networkStatus = NetworkReachabilityManager.NetworkReachabilityStatus.reachable(.ethernetOrWiFi)
     
@@ -129,8 +132,9 @@ extension JHNetwork{
         let resultCallBack = { (response: DataResponse<Any>)in
             if response.result.isSuccess{
                 let value = response.result.value as Any?
-                finished(JSON(value as Any),nil)
-                self.cacheResponse(response: response.result.value, url: urlStr, parameters: parameters)
+                let js = JSON(value as Any)
+                finished(js,nil)
+                self.cacheResponse(response: js, url: urlStr, parameters: parameters)
             }else{
                 finished(nil,response.result.error as NSError?)
             }
@@ -140,7 +144,7 @@ extension JHNetwork{
         manager = Alamofire.SessionManager(configuration: config)
         //2.请求数据
         let httpMethod:HTTPMethod = methodType == .GET ? .get : .post
-        manager.request(urlStr,method:httpMethod,parameters:parameters,encoding:URLEncoding.default,headers:nil).responseJSON(completionHandler:resultCallBack)
+        manager.request(urlStr,method:httpMethod,parameters:parameters,encoding:URLEncoding.default,headers:httpHeader).responseJSON(completionHandler:resultCallBack)
         
     }
     
@@ -171,20 +175,114 @@ extension JHNetwork{
         return absoluteUrl
     }
     
-    func cacheResponse(response:Any?,url:String,parameters:[String :Any]?) {
-        print("response = \(response) \n url = \(url) \n parameters= = \(parameters)")
-        print("md5 = \(self.md5String(str: url))")
+    
+    /// 保存网络回调数据
+    ///
+    /// - Parameters:
+    ///   - response: 网络回调JSON数据
+    ///   - url: 外部传入的接口
+    ///   - parameters: 外部传入的参数
+    func cacheResponse(response:JSON?,url:String,parameters:[String :Any]?) {
+        if response != nil {
+            let directoryPath = cachePath()
+            if !FileManager.default.fileExists(atPath: directoryPath) {
+                do {
+                    try FileManager.default.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    print("创建文件夹失败 error = ",error)
+                    return
+                }
+            }
+            let absolute = absoluteUrlWithPath(path: url)
+            let absoluteGet = generateGETAbsoluteURL(url: absolute, params: parameters)
+            let key = md5String(str: absoluteGet)
+            let path = directoryPath.appending("/\(key)")
+            var data:Data? = nil
+            do {
+                data = try JSONSerialization.data(withJSONObject: response?.dictionaryObject ?? [:], options: .prettyPrinted)
+            } catch  {
+                print("Data error = \(error)")
+            }
+            if data != nil {
+                FileManager.default.createFile(atPath: path, contents: data, attributes: nil)
+                print("保存网络数据成功 path = \(path), \n url = \(absoluteGet)")
+            }
+            
+        }
+    }
+
+    
+    /// 获取缓存的JSON数据
+    ///
+    /// - Parameters:
+    ///   - url: 外部接口
+    ///   - parameters: 参数字典
+    /// - Returns: 缓存的JSON数据
+    func getCacheResponseWithURL(url:String,parameters:[String :Any]?) -> JSON? {
+        var json:JSON? = nil
+        let directoryPath = cachePath()
+        let absolute = absoluteUrlWithPath(path: url)
+        let absoluteGet = generateGETAbsoluteURL(url: absolute, params: parameters)
+        let key = md5String(str: absoluteGet)
+        let path = directoryPath.appending("/\(key)")
+        let data = FileManager.default.contents(atPath: path)
+        if data != nil {
+            json = JSON(data!)
+            print("读取缓存的数据 URL = \(url)")
+        }
         
+        return json
     }
     
-    func absoluteUrlWithPath(path:String) -> String {
-        return path
+    /// 拼接基础路径和接口路径
+    ///
+    /// - Parameter path: 接口路径
+    /// - Returns: 完整的接口url
+    func absoluteUrlWithPath(path:String?) -> String {
+        if path == nil || path?.characters.count == 0 {
+            return ""
+        }
+        if baseUrl == nil || baseUrl?.characters.count == 0 {
+            return path!
+        }
+        var absoluteUrl = path!
+        if !path!.hasPrefix("http://") && !path!.hasPrefix("https://"){
+            if baseUrl!.hasSuffix("/") {
+                if path!.hasPrefix("/") {
+                    var mutablePath = path!
+                    mutablePath.remove(at: mutablePath.index(mutablePath.startIndex, offsetBy: 0))
+                    absoluteUrl = baseUrl! + mutablePath
+                }else{
+                    absoluteUrl = baseUrl! + path!
+                }
+            }else{
+                if path!.hasPrefix("/") {
+                    absoluteUrl = baseUrl! + path!
+                }else{
+                    absoluteUrl = baseUrl! + "/" + path!
+                }
+            }
+        }
+        return absoluteUrl
     }
     
+    
+    /// 参数字典增加默认key／value
+    ///
+    /// - Parameter params: 外部传入的参数字典
+    /// - Returns: 添加默认key／value的字典
     func appendDefaultParameter(params:[String:Any]?) -> [String:Any]? {
         var par = params
         par?["version"] = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         return par
+    }
+    
+    
+    /// 获取缓存的文件夹路径
+    ///
+    /// - Returns: 文件夹路径
+    private func cachePath() -> String{
+        return NSHomeDirectory().appending("/Library/Caches/JHNetworkCaches")
     }
 }
 
