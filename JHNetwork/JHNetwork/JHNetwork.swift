@@ -159,6 +159,19 @@ extension JHNetwork{
     ///   - finished: 回调
     func requestData(methodType: RequestType, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, finished: @escaping networkJSON){
         
+        var absolute: String? = nil
+        absolute = absoluteUrlWithPath(path: urlStr)
+        if autoEncode {
+            absolute = absolute?.urlEncode
+            print("Encode URL ===>>>>",absolute!)
+        }
+        
+        let URL: NSURL? = NSURL(string: absolute!)
+        if URL == nil {
+            print("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL")
+            return
+        }
+        //开始业务判断
         //如果不刷新缓存，如果已存在缓存，则返回缓存，否则请求网络，但是不缓存数据
         if !refreshCache {
             let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
@@ -171,9 +184,8 @@ extension JHNetwork{
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = TimeInterval(timeout)
         manager = Alamofire.SessionManager(configuration: config)
-        let absolute = absoluteUrlWithPath(path: urlStr)
         
-        //1.定义请求结果回调闭包
+        //定义请求结果回调闭包
         let resultCallBack = { (response: DataResponse<Any>)in
             if response.result.isSuccess{
                 let value = response.result.value as Any?
@@ -187,9 +199,9 @@ extension JHNetwork{
                 finished(nil, response.result.error as NSError?)
             }
         }
-        //2.请求数据
+        //请求数据
         let httpMethod:HTTPMethod = methodType == .GET ? .get : .post
-        manager.request(absolute, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
+        manager.request(absolute!, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
         
     }
     
@@ -287,6 +299,9 @@ extension JHNetwork{
     /// - Returns: 完整的接口url
     private func absoluteUrlWithPath(path: String?) -> String {
         if path == nil || path?.characters.count == 0 {
+            if baseUrl != nil {
+                return baseUrl!
+            }
             return ""
         }
         if baseUrl == nil || baseUrl?.characters.count == 0 {
@@ -333,6 +348,15 @@ extension JHNetwork{
     }
 }
 
-
+extension String {
+    // url encode
+    var urlEncode:String? {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+    }
+    // url decode
+    var urlDecode :String? {
+        return self.removingPercentEncoding
+    }
+}
 
 

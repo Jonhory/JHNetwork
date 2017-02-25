@@ -13,17 +13,30 @@ import SwiftyJSON
 class ViewController: UIViewController {
 
     let url2 = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=218.4.255.255"
+    let url3 = "http://www.baidu.com/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        test1()
+        test2()
+    }
+    
+    func test2() {
+        JHNetwork.shared.baseUrl = url3
+        let par: [String: Any]? = [:]
+        JHNetwork.shared.autoEncode = true
+        JHNetwork.shared.getNoCacheData(url: "s/wd=你好", parameters: par) { (re, er) in
+            if er != nil {
+                print("error = \(er)")
+            }else{
+                print("response = \(re)")
+            }
+        }
     }
     
     func test1() {
         JHNetwork.shared.baseUrl = "http://int.dpool.sina.com.cn"
-        
 //        JHNetwork.shared.requestData(methodType: .POST, urlStr: "iplookup/iplookup.php?format=json&ip=218.4.255.255", refreshCache: true, isCache: true, parameters: nil) { (result, error) in
 //            print("1 => ",result ?? "result == nil")
 //            print("\n")
@@ -34,6 +47,7 @@ class ViewController: UIViewController {
             print("result = \(result)")
             print("error = \(error)")
         }
+    
         
         //
         //        let url3 = "http://ip.taobao.com/service/getIpInfo.php?ip=63.223.108.42"
