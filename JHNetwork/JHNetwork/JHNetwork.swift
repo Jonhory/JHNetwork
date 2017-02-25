@@ -69,6 +69,8 @@ class JHNetwork{
     var autoEncode = false
     /// 取消请求时，是否返回失败回调
     var shouldCallbackOnCancelRequest = false
+    /// 设置是否打印log信息
+    var enableInterfaceDebug = true
     /// 网络异常时，是否从本地提取数据
     private var shoulObtainLocalWhenUnconnected = true
     
@@ -99,7 +101,9 @@ extension JHNetwork {
         listen?.startListening()
         listen?.listener = { status in
             self.networkStatus = status
-            print("*** <<<Network Status Changed>>> ***:\(status)")
+            if self.enableInterfaceDebug {
+                WLog("*** <<<Network Status Changed>>> ***:\(status)")
+            }
             networkListen(status)
         }
     }
@@ -183,12 +187,16 @@ extension JHNetwork{
         absolute = absoluteUrlWithPath(path: urlStr)
         if autoEncode {
             absolute = absolute?.urlEncode
-            print("Encode URL ===>>>>",absolute!)
+            if enableInterfaceDebug {
+                WLog("Encode URL ===>>>>\(absolute)")
+            }
         }
         
         let URL: NSURL? = NSURL(string: absolute!)
         if URL == nil {
-            print("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL")
+            if enableInterfaceDebug {
+                WLog("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL")
+            }
             return
         }
         //开始业务判断
@@ -223,6 +231,40 @@ extension JHNetwork{
         let httpMethod:HTTPMethod = methodType == .GET ? .get : .post
         manager.request(absolute!, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
         
+    }
+    
+    
+    /// 获取网络数据缓存字节数
+    ///
+    /// - Returns: 网络数据缓存字节数
+    func totalCacheSize() -> Double {
+        let path = cachePath()
+        var isDir: ObjCBool = false
+        var total: Double = 0
+        
+        FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
+        if isDir.boolValue {
+            do {
+                let array = try FileManager.default.contentsOfDirectory(atPath: path)
+                for subPath in array {
+                    let subPath = path + "/" + subPath
+                    do {
+                        let dict: NSDictionary = try FileManager.default.attributesOfItem(atPath: subPath) as NSDictionary
+                        total += Double(dict.fileSize())
+                    } catch  {
+                        if enableInterfaceDebug {
+                            WLog("失败==\(error)")
+                        }
+                    }
+                    
+                }
+            } catch  {
+                if enableInterfaceDebug {
+                    WLog("失败==\(error)")
+                }
+            }
+        }
+        return total
     }
     
     //MARK: 私有方法
@@ -268,7 +310,9 @@ extension JHNetwork{
                 do {
                     try FileManager.default.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
                 } catch {
-                    print("创建文件夹失败 error = ",error)
+                    if enableInterfaceDebug {
+                        WLog("创建文件夹失败 error = \(error)")
+                    }
                     return
                 }
             }
@@ -280,11 +324,15 @@ extension JHNetwork{
             do {
                 data = try JSONSerialization.data(withJSONObject: response?.dictionaryObject ?? [:], options: .prettyPrinted)
             } catch  {
-                print("Data error = \(error)")
+                if enableInterfaceDebug {
+                    WLog("Data error = \(error)")
+                }
             }
             if data != nil {
                 FileManager.default.createFile(atPath: path, contents: data, attributes: nil)
-                print("保存网络数据成功 path = \(path), \n url = \(absoluteGet)")
+                if enableInterfaceDebug {
+                    WLog("保存网络数据成功 path = \(path), \n url = \(absoluteGet)")
+                }
             }
             
         }
@@ -307,7 +355,9 @@ extension JHNetwork{
         let data = FileManager.default.contents(atPath: path)
         if data != nil {
             json = JSON(data!)
-            print("读取缓存的数据 URL = \(url)")
+            if enableInterfaceDebug{
+                WLog("读取缓存的数据 URL = \(url)")
+            }
         }
         
         return json

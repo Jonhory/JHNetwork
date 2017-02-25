@@ -19,7 +19,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        test3()
+        test1()
+    }
+    
+    func test4() {
+        WLog(JHNetwork.shared.totalCacheSize())
     }
     
     func test3() {
@@ -49,11 +53,12 @@ class ViewController: UIViewController {
 //            print(error ?? "error == nil")
 //        }
         
-        JHNetwork.shared.getNoCacheData(url: "iplookup/iplookup.php?format=json&ip=218.4.255.250", refreshCache: false, parameters: nil) { (result, error) in
+        JHNetwork.shared.getData(url: url2, refreshCache: true, parameters: nil) { (result, error) in
             print("result = \(result)")
             print("error = \(error)")
+            self.test4()
         }
-    
+
         
         //
         //        let url3 = "http://ip.taobao.com/service/getIpInfo.php?ip=63.223.108.42"
