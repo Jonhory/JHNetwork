@@ -29,12 +29,12 @@ func WLog<T>(_ messsage : T, file : String = #file, funcName : String = #functio
 ///
 /// - Parameter str: 需要加密的字符串
 /// - Returns: 32位大写加密
-func md5String(str:String) -> String{
-    let cStr = str.cString(using: String.Encoding.utf8);
+func md5String(str:String) -> String {
+    let cStr = str.cString(using: String.Encoding.utf8)
     let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
     CC_MD5(cStr!,(CC_LONG)(strlen(cStr!)), buffer)
-    let md5String = NSMutableString();
-    for i in 0 ..< 16{
+    let md5String = NSMutableString()
+    for i in 0 ..< 16 {
         md5String.appendFormat("%02x", buffer[i])
     }
     free(buffer)
@@ -47,7 +47,7 @@ enum RequestType:Int {
     case POST
 }
 
-class JHNetwork{
+class JHNetwork {
     //MARK:单例
     static let shared = JHNetwork()
     private init() {}
@@ -114,7 +114,7 @@ extension JHNetwork {
 }
 
 // MARK: - 网络请求相关
-extension JHNetwork{
+extension JHNetwork {
     //MARK:获取缓存
     func getCache(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
         getData(url: url, refreshCache: false, parameters: parameters) { (js, error) in
@@ -185,7 +185,7 @@ extension JHNetwork{
     ///   - isCache: 是否缓存
     ///   - parameters: 参数字典
     ///   - finished: 回调
-    func requestData(methodType: RequestType, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, finished: @escaping networkJSON){
+    func requestData(methodType: RequestType, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
         
         var absolute: String? = nil
         absolute = absoluteUrlWithPath(path: urlStr)
@@ -232,15 +232,13 @@ extension JHNetwork{
             }
         }
         
-        
-        
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = TimeInterval(timeout)
         manager = Alamofire.SessionManager(configuration: config)
         
         //定义请求结果回调闭包
-        let resultCallBack = { (response: DataResponse<Any>)in
-            if response.result.isSuccess{
+        let resultCallBack = { (response: DataResponse<Any>) in
+            if response.result.isSuccess {
                 let value = response.result.value as Any?
                 let js = JSON(value as Any)
                 // 如果刷新缓存并且缓存
@@ -249,7 +247,7 @@ extension JHNetwork{
                 }
                 finished(js, nil)
                 self.networkLogSuccess(json: js, url: urlStr, params: parameters)
-            }else{
+            } else {
                 let error = response.result.error as NSError?
                 if error != nil && error!.code < 0 && isCache {
                     let js = self.getCacheResponseWithURL(url: urlStr, parameters: parameters)
@@ -259,17 +257,17 @@ extension JHNetwork{
                         }
                         finished(js, nil)
                         self.networkLogSuccess(json: js, url: urlStr, params: parameters)
-                    }else{
+                    } else {
                         finished(nil, error)
                         self.networkLogFail(error: error, url: urlStr, params: parameters)
                     }
-                }else{
+                } else {
                     finished(nil, error)
                     self.networkLogFail(error: error, url: urlStr, params: parameters)
                 }
             }
         }
-        //请求数据
+        //正式发起网络请求
         let httpMethod:HTTPMethod = methodType == .GET ? .get : .post
         manager.request(absolute!, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
         
@@ -319,11 +317,11 @@ extension JHNetwork{
             if isDir.boolValue {
                 do {
                     try FileManager.default.removeItem(atPath: path)
-                    if self.enableInterfaceDebug{
+                    if self.enableInterfaceDebug {
                         WLog("清除网络数据缓存成功🍎")
                     }
                 } catch  {
-                    if self.enableInterfaceDebug{
+                    if self.enableInterfaceDebug {
                         WLog("清除网络数据缓存失败 = \(error)")
                     }
                 }
@@ -360,7 +358,7 @@ extension JHNetwork{
             let absolute = absoluteUrlWithPath(path: url)
             if error?.code == NSURLErrorCancelled {
                 WLog("\n请求被取消🏠, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
-            }else{
+            } else {
                 WLog("\n请求错误❌, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
             }
         }
@@ -372,18 +370,20 @@ extension JHNetwork{
     ///   - url: 完整的url
     ///   - params: 参数字典
     /// - Returns: GET形式的字符串
-    private func generateGETAbsoluteURL(url: String, params: [String:Any]?) -> String{
+    private func generateGETAbsoluteURL(url: String, params: [String:Any]?) -> String {
         var absoluteUrl = ""
         
         if params != nil {
             let par = appendDefaultParameter(params: params)
-            for (key,value):(String,Any) in par!{
+            for (key,value):(String,Any) in par! {
                 if value is String {
                     absoluteUrl = absoluteUrl + "&" + key + "=" + (value as! String)
                 }else if value is Int {
                     absoluteUrl = absoluteUrl + "&" + key + "=" + "\(value as! Int)"
                 }else if value is Double {
                     absoluteUrl = absoluteUrl + "&" + key + "=" + "\(value as! Double)"
+                }else if value is Float {
+                    absoluteUrl = absoluteUrl + "&" + key + "=" + "\(value as! Float)"
                 }
             }
         }
@@ -452,7 +452,7 @@ extension JHNetwork{
         let data = FileManager.default.contents(atPath: path)
         if data != nil {
             json = JSON(data!)
-            if enableInterfaceDebug{
+            if enableInterfaceDebug {
                 WLog("读取缓存的数据🚩 URL = \(absoluteGet)")
             }
         }
@@ -475,19 +475,19 @@ extension JHNetwork{
             return path!
         }
         var absoluteUrl = path!
-        if !path!.hasPrefix("http://") && !path!.hasPrefix("https://"){
+        if !path!.hasPrefix("http://") && !path!.hasPrefix("https://") {
             if baseUrl!.hasSuffix("/") {
                 if path!.hasPrefix("/") {
                     var mutablePath = path!
                     mutablePath.remove(at: mutablePath.index(mutablePath.startIndex, offsetBy: 0))
                     absoluteUrl = baseUrl! + mutablePath
-                }else{
+                } else {
                     absoluteUrl = baseUrl! + path!
                 }
-            }else{
+            } else {
                 if path!.hasPrefix("/") {
                     absoluteUrl = baseUrl! + path!
-                }else{
+                } else {
                     absoluteUrl = baseUrl! + "/" + path!
                 }
             }
@@ -510,7 +510,7 @@ extension JHNetwork{
     /// 获取缓存的文件夹路径
     ///
     /// - Returns: 文件夹路径
-    private func cachePath() -> String{
+    private func cachePath() -> String {
         return NSHomeDirectory().appending("/Library/Caches/JHNetworkCaches")
     }
 }
