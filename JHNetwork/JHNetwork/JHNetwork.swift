@@ -18,7 +18,7 @@ import SwiftyJSON
 ///   - file: 文件名
 ///   - funcName: 方法名
 ///   - lineNum: 行数
-func WLog<T>(_ messsage : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
+func WLog<T>(_ messsage: T, file: String = #file, funcName: String = #function, lineNum: Int = #line) {
     #if DEBUG
         let fileName = (file as NSString).lastPathComponent
         print("\(fileName):(\(lineNum))==>>>\(messsage)")
@@ -29,7 +29,7 @@ func WLog<T>(_ messsage : T, file : String = #file, funcName : String = #functio
 ///
 /// - Parameter str: 需要加密的字符串
 /// - Returns: 32位大写加密
-func md5String(str:String) -> String {
+func md5String(str: String) -> String {
     let cStr = str.cString(using: String.Encoding.utf8)
     let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
     CC_MD5(cStr!,(CC_LONG)(strlen(cStr!)), buffer)
@@ -66,20 +66,16 @@ class JHNetwork {
     ///配置公共请求头
     var httpHeader:HTTPHeaders? = nil
     /// 是否自动ecode
-    var autoEncode = false
-    /// 取消请求时，是否返回失败回调
-    var shouldCallbackOnCancelRequest = false
+    var encodeAble = false
     /// 设置是否打印log信息
-    var enableInterfaceDebug = true
+    var isDebug = true
     /// 网络异常时，是否从本地提取数据
     var shoulObtainLocalWhenUnconnected = true
-    
     /// 当前网络状态，默认WIFI，开启网络状态监听后有效
     var networkStatus = NetworkReachabilityManager.NetworkReachabilityStatus.reachable(.ethernetOrWiFi)
     
     var manager:SessionManager!
     let listen = NetworkReachabilityManager()
-    
     
     /// 当检测到网络异常时,是否从本地提取数据,如果是，则发起网络状态监听
     ///
@@ -101,7 +97,7 @@ extension JHNetwork {
         listen?.startListening()
         listen?.listener = { status in
             self.networkStatus = status
-            if self.enableInterfaceDebug {
+            if self.isDebug {
                 WLog("*** <<<Network Status Changed>>> ***:\(status)")
             }
             networkListen(status)
@@ -116,62 +112,62 @@ extension JHNetwork {
 // MARK: - 网络请求相关
 extension JHNetwork {
     //MARK:获取缓存
-    func getCache(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
-        getData(url: url, refreshCache: false, parameters: parameters) { (js, error) in
+    func getCacheForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        getForJSON(url: url, refreshCache: false, parameters: parameters) { (js, error) in
             finished(js, nil)
         }
     }
     
     //MARK:缓存GET
-    func getData(url: String, finished: @escaping networkJSON) {
-        getData(url: url, parameters: nil, finished: finished)
+    func getForJSON(url: String, finished: @escaping networkJSON) {
+        getForJSON(url: url, parameters: nil, finished: finished)
     }
     
-    func getData(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
-        getData(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    func getForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        getForJSON(url: url, refreshCache: true, parameters: parameters, finished: finished)
     }
     
-    func getData(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
-        requestData(methodType: .GET, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
+    func getForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        requestJSON(methodType: .GET, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
     }
     
     //MARK:不缓存GET
-    func getNoCacheData(url: String, finished: @escaping networkJSON) {
-        getNoCacheData(url: url, parameters: nil, finished: finished)
+    func getNoCacheForJSON(url: String, finished: @escaping networkJSON) {
+        getNoCacheForJSON(url: url, parameters: nil, finished: finished)
     }
     
-    func getNoCacheData(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
-        getNoCacheData(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    func getNoCacheForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        getNoCacheForJSON(url: url, refreshCache: true, parameters: parameters, finished: finished)
     }
     
-    func getNoCacheData(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
-        requestData(methodType: .GET, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, finished: finished)
+    func getNoCacheForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        requestJSON(methodType: .GET, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, finished: finished)
     }
     
     //MARK:缓存POST
-    func postData(url: String, finished: @escaping networkJSON) {
-        postData(url: url, parameters: nil, finished: finished)
+    func postForJSON(url: String, finished: @escaping networkJSON) {
+        postForJSON(url: url, parameters: nil, finished: finished)
     }
     
-    func postData(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
-        postData(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    func postForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        postForJSON(url: url, refreshCache: true, parameters: parameters, finished: finished)
     }
     
-    func postData(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
-        requestData(methodType: .POST, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
+    func postForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        requestJSON(methodType: .POST, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
     }
     
     //MARK:不缓存POST
-    func postNoCacheData(url: String, finished: @escaping networkJSON) {
-        postNoCacheData(url: url, parameters: nil, finished: finished)
+    func postNoCacheForJSON(url: String, finished: @escaping networkJSON) {
+        postNoCacheForJSON(url: url, parameters: nil, finished: finished)
     }
     
-    func postNoCacheData(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
-        postNoCacheData(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    func postNoCacheForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        postNoCacheForJSON(url: url, refreshCache: true, parameters: parameters, finished: finished)
     }
     
-    func postNoCacheData(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
-        requestData(methodType: .POST, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, finished: finished)
+    func postNoCacheForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        requestJSON(methodType: .POST, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, finished: finished)
     }
     
     //MARK:请求JSON数据最底层
@@ -185,20 +181,20 @@ extension JHNetwork {
     ///   - isCache: 是否缓存
     ///   - parameters: 参数字典
     ///   - finished: 回调
-    func requestData(methodType: RequestType, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
+    func requestJSON(methodType: RequestType, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, finished: @escaping networkJSON) {
         
         var absolute: String? = nil
-        absolute = absoluteUrlWithPath(path: urlStr)
-        if autoEncode {
+        absolute = absoluteUrl(path: urlStr)
+        if encodeAble {
             absolute = absolute?.urlEncode
-            if enableInterfaceDebug {
+            if isDebug {
                 WLog("Encode URL ===>>>>\(absolute)")
             }
         }
         
         let URL: NSURL? = NSURL(string: absolute!)
         if URL == nil {
-            if enableInterfaceDebug {
+            if isDebug {
                 WLog("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL")
             }
             return
@@ -207,9 +203,9 @@ extension JHNetwork {
         if isCache {
             if shoulObtainLocalWhenUnconnected {
                 if networkStatus == NetworkReachabilityManager.NetworkReachabilityStatus.unknown || networkStatus == NetworkReachabilityManager.NetworkReachabilityStatus.notReachable {
-                    let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
+                    let js = getCacheResponse(url: urlStr, parameters: parameters)
                     if js != nil {
-                        if enableInterfaceDebug {
+                        if isDebug {
                             WLog("🇨🇳因为无网络连接而读取缓存")
                         }
                         finished(js, nil)
@@ -220,9 +216,9 @@ extension JHNetwork {
             }
             //如果不刷新缓存，如果已存在缓存，则返回缓存，否则请求网络，但是不缓存数据
             if !refreshCache {
-                let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
+                let js = getCacheResponse(url: urlStr, parameters: parameters)
                 if js != nil {
-                    if enableInterfaceDebug {
+                    if isDebug {
                         WLog("🇨🇳因为不刷新缓存而读取缓存")
                     }
                     finished(js, nil)
@@ -250,9 +246,9 @@ extension JHNetwork {
             } else {
                 let error = response.result.error as NSError?
                 if error != nil && error!.code < 0 && isCache {
-                    let js = self.getCacheResponseWithURL(url: urlStr, parameters: parameters)
+                    let js = self.getCacheResponse(url: urlStr, parameters: parameters)
                     if js != nil {
-                        if self.enableInterfaceDebug {
+                        if self.isDebug {
                             WLog("🇨🇳因为\(error)而读取缓存")
                         }
                         finished(js, nil)
@@ -292,14 +288,14 @@ extension JHNetwork {
                         let dict: NSDictionary = try FileManager.default.attributesOfItem(atPath: subPath) as NSDictionary
                         total += Double(dict.fileSize())
                     } catch  {
-                        if enableInterfaceDebug {
+                        if isDebug {
                             WLog("失败==\(error)")
                         }
                     }
                     
                 }
             } catch  {
-                if enableInterfaceDebug {
+                if isDebug {
                     WLog("失败==\(error)")
                 }
             }
@@ -317,11 +313,11 @@ extension JHNetwork {
             if isDir.boolValue {
                 do {
                     try FileManager.default.removeItem(atPath: path)
-                    if self.enableInterfaceDebug {
+                    if self.isDebug {
                         WLog("清除网络数据缓存成功🍎")
                     }
                 } catch  {
-                    if self.enableInterfaceDebug {
+                    if self.isDebug {
                         WLog("清除网络数据缓存失败 = \(error)")
                     }
                 }
@@ -340,8 +336,8 @@ extension JHNetwork {
     ///   - url: 接口
     ///   - params: 参数
     private func networkLogSuccess(json: JSON?, url: String, params: [String:Any]?) {
-        if enableInterfaceDebug {
-            let absolute = absoluteUrlWithPath(path: url)
+        if isDebug {
+            let absolute = absoluteUrl(path: url)
             WLog("\n请求成功🍎, url ==>> \(absolute) \nparams ==>> \(params) \nresponse ==>> \(json)")
         }
     }
@@ -354,8 +350,8 @@ extension JHNetwork {
     ///   - url: 接口信息
     ///   - params: 参数字典
     private func networkLogFail(error: NSError?, url: String, params: [String:Any]?) {
-        if enableInterfaceDebug {
-            let absolute = absoluteUrlWithPath(path: url)
+        if isDebug {
+            let absolute = absoluteUrl(path: url)
             if error?.code == NSURLErrorCancelled {
                 WLog("\n请求被取消🏠, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
             } else {
@@ -407,13 +403,13 @@ extension JHNetwork {
                 do {
                     try FileManager.default.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
                 } catch {
-                    if enableInterfaceDebug {
+                    if isDebug {
                         WLog("创建文件夹失败 error = \(error)")
                     }
                     return
                 }
             }
-            let absolute = absoluteUrlWithPath(path: url)
+            let absolute = absoluteUrl(path: url)
             let absoluteGet = generateGETAbsoluteURL(url: absolute, params: parameters)
             let key = md5String(str: absoluteGet)
             let path = directoryPath.appending("/\(key)")
@@ -421,13 +417,13 @@ extension JHNetwork {
             do {
                 data = try JSONSerialization.data(withJSONObject: response?.dictionaryObject ?? [:], options: .prettyPrinted)
             } catch  {
-                if enableInterfaceDebug {
+                if isDebug {
                     WLog("Data error = \(error)")
                 }
             }
             if data != nil {
                 FileManager.default.createFile(atPath: path, contents: data, attributes: nil)
-                if enableInterfaceDebug {
+                if isDebug {
                     WLog("保存网络数据成功 url = \(absoluteGet)")
                 }
             }
@@ -442,17 +438,17 @@ extension JHNetwork {
     ///   - url: 外部接口
     ///   - parameters: 参数字典
     /// - Returns: 缓存的JSON数据
-    private func getCacheResponseWithURL(url: String, parameters: [String :Any]?) -> JSON? {
+    private func getCacheResponse(url: String, parameters: [String :Any]?) -> JSON? {
         var json:JSON? = nil
         let directoryPath = cachePath()
-        let absolute = absoluteUrlWithPath(path: url)
+        let absolute = absoluteUrl(path: url)
         let absoluteGet = generateGETAbsoluteURL(url: absolute, params: parameters)
         let key = md5String(str: absoluteGet)
         let path = directoryPath.appending("/\(key)")
         let data = FileManager.default.contents(atPath: path)
         if data != nil {
             json = JSON(data!)
-            if enableInterfaceDebug {
+            if isDebug {
                 WLog("读取缓存的数据🚩 URL = \(absoluteGet)")
             }
         }
@@ -464,7 +460,7 @@ extension JHNetwork {
     ///
     /// - Parameter path: 接口路径
     /// - Returns: 完整的接口url
-    private func absoluteUrlWithPath(path: String?) -> String {
+    private func absoluteUrl(path: String?) -> String {
         if path == nil || path?.characters.count == 0 {
             if baseUrl != nil {
                 return baseUrl!

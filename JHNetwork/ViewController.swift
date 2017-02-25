@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     }
     
     func test3() {
-        JHNetwork.shared.getCache(url: url2, parameters: nil) { (js, _) in
+        JHNetwork.shared.getCacheForJSON(url: url2, parameters: nil) { (js, _) in
             WLog(js)
         }
     }
@@ -39,8 +39,8 @@ class ViewController: UIViewController {
     func test2() {
         JHNetwork.shared.baseUrl = url3
         let par: [String: Any]? = [:]
-        JHNetwork.shared.autoEncode = true
-        JHNetwork.shared.getNoCacheData(url: "s/wd=你好", parameters: par) { (re, er) in
+        JHNetwork.shared.encodeAble = true
+        JHNetwork.shared.getNoCacheForJSON(url: "s/wd=你好", parameters: par) { (re, er) in
             if er != nil {
                 print("error = \(er)")
             }else{
@@ -51,31 +51,12 @@ class ViewController: UIViewController {
     
     func test1() {
         JHNetwork.shared.baseUrl = "http://int.dpool.sina.com.cn"
-//        JHNetwork.shared.requestData(methodType: .POST, urlStr: "iplookup/iplookup.php?format=json&ip=218.4.255.255", refreshCache: true, isCache: true, parameters: nil) { (result, error) in
-//            print("1 => ",result ?? "result == nil")
-//            print("\n")
-//            print(error ?? "error == nil")
-//        }
         
-        JHNetwork.shared.getData(url: url2, refreshCache: true, parameters: nil) { (result, error) in
+        JHNetwork.shared.getForJSON(url: url2, refreshCache: true, parameters: nil) { (result, error) in
         }
         
-        JHNetwork.shared.getData(url: url2, refreshCache: true, parameters: ["name":"jj"]) { (result, error) in
+        JHNetwork.shared.getForJSON(url: url2, refreshCache: true, parameters: ["name":"jj"]) { (result, error) in
         }
-
-        
-        //
-        //        let url3 = "http://ip.taobao.com/service/getIpInfo.php?ip=63.223.108.42"
-        //        JHNetwork.shared.postData(url: url2) { (result, error) in
-        //            print("2 => ",result ?? "result == nil")
-        //            print("\n")
-        //            print(error ?? "error == nil")
-        //        }
-        
-        let par:[String : Any] = ["xx":2.22,"name":"wujh","sex":0]
-        //        JHNetwork.shared.postData(url: url2, parameters: ["xx":par]) { (js, error) in
-        //
-        //        }
         
         JHNetwork.shared.shoulObtainLocalWhenUnconnected(shouldObtain: false)
     }
