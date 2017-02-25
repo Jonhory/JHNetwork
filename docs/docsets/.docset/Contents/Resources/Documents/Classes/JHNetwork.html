@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JHNetwork Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/JHNetwork" class="dashAnchor"></a>
+    <a title="JHNetwork Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (30% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        JHNetwork Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/JHNetwork.html">JHNetwork</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ViewController.html">ViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/RequestType.html">RequestType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F9JHNetwork4WLogurFTx4fileSS8funcNameSS7lineNumSi_T_">WLog(_:file:funcName:lineNum:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F9JHNetwork9md5StringFT3strSS_SS">md5String(str:)</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>JHNetwork</h1>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/MARK:%E5%8D%95%E4%BE%8B"></a>
+                <a name="//apple_ref/swift/Section/MARK:单例" class="dashAnchor"></a>
+                <a href="#/MARK:%E5%8D%95%E4%BE%8B">
+                  <h3 class="section-name">MARK:单例</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C9JHNetwork9JHNetwork11networkJSON"></a>
+                    <a name="//apple_ref/swift/Alias/networkJSON" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C9JHNetwork9JHNetwork11networkJSON">networkJSON</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>JSON数据回调</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">typealias</span> <span class="n">networkJSON</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">result</span><span class="p">:</span><span class="kt">JSON</span><span class="p">?,</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span><span class="kt">NSError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C9JHNetwork9JHNetwork13networkListen"></a>
+                    <a name="//apple_ref/swift/Alias/networkListen" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C9JHNetwork9JHNetwork13networkListen">networkListen</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>网络状态监听回调</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">typealias</span> <span class="n">networkListen</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">status</span><span class="p">:</span><span class="kt">NetworkReachabilityManager</span><span class="o">.</span><span class="kt">NetworkReachabilityStatus</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C9JHNetwork9JHNetwork15networkResponse"></a>
+                    <a name="//apple_ref/swift/Alias/networkResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C9JHNetwork9JHNetwork15networkResponse">networkResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>普通网络回调</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">typealias</span> <span class="n">networkResponse</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">result</span><span class="p">:</span><span class="kt">Any</span><span class="p">?,</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span><span class="kt">NSError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvC9JHNetwork9JHNetwork6sharedS0_"></a>
+                    <a name="//apple_ref/swift/Variable/shared" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvC9JHNetwork9JHNetwork6sharedS0_">shared</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9JHNetwork9JHNetwork7baseUrlGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/baseUrl" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9JHNetwork9JHNetwork7baseUrlGSqSS_">baseUrl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>网络基础url</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">baseUrl</span><span class="p">:</span><span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9JHNetwork9JHNetwork7timeoutSi"></a>
+                    <a name="//apple_ref/swift/Property/timeout" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9JHNetwork9JHNetwork7timeoutSi">timeout</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>请求超时</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">timeout</span> <span class="o">=</span> <span class="mi">15</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9JHNetwork9JHNetwork10httpHeaderERR"></a>
+                    <a name="//apple_ref/swift/Property/httpHeader" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9JHNetwork9JHNetwork10httpHeaderERR">httpHeader</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>配置公共请求头</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">httpHeader</span><span class="p">:</span><span class="kt">HTTPHeaders</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9JHNetwork9JHNetwork10encodeAbleSb"></a>
+                    <a name="//apple_ref/swift/Property/encodeAble" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9JHNetwork9JHNetwork10encodeAbleSb">encodeAble</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>是否自动ecode</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">encodeAble</span> <span class="o">=</span> <span class="kc">false</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9JHNetwork9JHNetwork7isDebugSb"></a>
+                    <a name="//apple_ref/swift/Property/isDebug" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9JHNetwork9JHNetwork7isDebugSb">isDebug</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>设置是否打印log信息</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">isDebug</span> <span class="o">=</span> <span class="kc">true</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9JHNetwork9JHNetwork31shoulObtainLocalWhenUnconnectedSb"></a>
+                    <a name="//apple_ref/swift/Property/shoulObtainLocalWhenUnconnected" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9JHNetwork9JHNetwork31shoulObtainLocalWhenUnconnectedSb">shoulObtainLocalWhenUnconnected</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>网络异常时，是否从本地提取数据</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">shoulObtainLocalWhenUnconnected</span> <span class="o">=</span> <span class="kc">true</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9JHNetwork9JHNetwork13networkStatusERR"></a>
+                    <a name="//apple_ref/swift/Property/networkStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9JHNetwork9JHNetwork13networkStatusERR">networkStatus</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>当前网络状态，默认WIFI，开启网络状态监听后有效</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">networkStatus</span> <span class="o">=</span> <span class="kt">NetworkReachabilityManager</span><span class="o">.</span><span class="kt">NetworkReachabilityStatus</span><span class="o">.</span><span class="nf">reachable</span><span class="p">(</span><span class="o">.</span><span class="n">ethernetOrWiFi</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9JHNetwork9JHNetwork7managerERR"></a>
+                    <a name="//apple_ref/swift/Property/manager" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9JHNetwork9JHNetwork7managerERR">manager</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC9JHNetwork9JHNetwork6listenERR"></a>
+                    <a name="//apple_ref/swift/Property/listen" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC9JHNetwork9JHNetwork6listenERR">listen</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork31shoulObtainLocalWhenUnconnectedFT12shouldObtainSb_T_"></a>
+                    <a name="//apple_ref/swift/Method/shoulObtainLocalWhenUnconnected(shouldObtain:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork31shoulObtainLocalWhenUnconnectedFT12shouldObtainSb_T_">shoulObtainLocalWhenUnconnected(shouldObtain:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>当检测到网络异常时,是否从本地提取数据,如果是，则发起网络状态监听</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">shoulObtainLocalWhenUnconnected</span><span class="p">(</span><span class="nv">shouldObtain</span><span class="p">:</span><span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>shouldObtain</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>是否从本地提取数据</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork31listenNetworkReachabilityStatusERR"></a>
+                    <a name="//apple_ref/swift/Method/listenNetworkReachabilityStatus(networkListen:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork31listenNetworkReachabilityStatusERR">listenNetworkReachabilityStatus(networkListen:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>监听网络状态</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">listenNetworkReachabilityStatus</span><span class="p">(</span><span class="nv">networkListen</span><span class="p">:</span><span class="kd">@escaping</span> <span class="n"><a href="../Classes/JHNetwork.html#/s:C9JHNetwork9JHNetwork13networkListen">networkListen</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>networkListen</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>网络状态回调</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/MARK:%E8%8E%B7%E5%8F%96%E7%BC%93%E5%AD%98"></a>
+                <a name="//apple_ref/swift/Section/MARK:获取缓存" class="dashAnchor"></a>
+                <a href="#/MARK:%E8%8E%B7%E5%8F%96%E7%BC%93%E5%AD%98">
+                  <h3 class="section-name">MARK:获取缓存</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork15getCacheForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/getCacheForJSON(url:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork15getCacheForJSONERR">getCacheForJSON(url:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/MARK:%E7%BC%93%E5%AD%98GET"></a>
+                <a name="//apple_ref/swift/Section/MARK:缓存GET" class="dashAnchor"></a>
+                <a href="#/MARK:%E7%BC%93%E5%AD%98GET">
+                  <h3 class="section-name">MARK:缓存GET</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork10getForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/getForJSON(url:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork10getForJSONERR">getForJSON(url:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork10getForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/getForJSON(url:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork10getForJSONERR">getForJSON(url:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork10getForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/getForJSON(url:refreshCache:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork10getForJSONERR">getForJSON(url:refreshCache:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/MARK:%E4%B8%8D%E7%BC%93%E5%AD%98GET"></a>
+                <a name="//apple_ref/swift/Section/MARK:不缓存GET" class="dashAnchor"></a>
+                <a href="#/MARK:%E4%B8%8D%E7%BC%93%E5%AD%98GET">
+                  <h3 class="section-name">MARK:不缓存GET</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork17getNoCacheForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/getNoCacheForJSON(url:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork17getNoCacheForJSONERR">getNoCacheForJSON(url:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork17getNoCacheForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/getNoCacheForJSON(url:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork17getNoCacheForJSONERR">getNoCacheForJSON(url:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork17getNoCacheForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/getNoCacheForJSON(url:refreshCache:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork17getNoCacheForJSONERR">getNoCacheForJSON(url:refreshCache:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/MARK:%E7%BC%93%E5%AD%98POST"></a>
+                <a name="//apple_ref/swift/Section/MARK:缓存POST" class="dashAnchor"></a>
+                <a href="#/MARK:%E7%BC%93%E5%AD%98POST">
+                  <h3 class="section-name">MARK:缓存POST</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork11postForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/postForJSON(url:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork11postForJSONERR">postForJSON(url:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork11postForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/postForJSON(url:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork11postForJSONERR">postForJSON(url:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork11postForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/postForJSON(url:refreshCache:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork11postForJSONERR">postForJSON(url:refreshCache:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/MARK:%E4%B8%8D%E7%BC%93%E5%AD%98POST"></a>
+                <a name="//apple_ref/swift/Section/MARK:不缓存POST" class="dashAnchor"></a>
+                <a href="#/MARK:%E4%B8%8D%E7%BC%93%E5%AD%98POST">
+                  <h3 class="section-name">MARK:不缓存POST</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork18postNoCacheForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/postNoCacheForJSON(url:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork18postNoCacheForJSONERR">postNoCacheForJSON(url:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork18postNoCacheForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/postNoCacheForJSON(url:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork18postNoCacheForJSONERR">postNoCacheForJSON(url:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork18postNoCacheForJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/postNoCacheForJSON(url:refreshCache:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork18postNoCacheForJSONERR">postNoCacheForJSON(url:refreshCache:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/MARK:%E8%AF%B7%E6%B1%82JSON%E6%95%B0%E6%8D%AE%E6%9C%80%E5%BA%95%E5%B1%82"></a>
+                <a name="//apple_ref/swift/Section/MARK:请求JSON数据最底层" class="dashAnchor"></a>
+                <a href="#/MARK:%E8%AF%B7%E6%B1%82JSON%E6%95%B0%E6%8D%AE%E6%9C%80%E5%BA%95%E5%B1%82">
+                  <h3 class="section-name">MARK:请求JSON数据最底层</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork11requestJSONERR"></a>
+                    <a name="//apple_ref/swift/Method/requestJSON(methodType:urlStr:refreshCache:isCache:parameters:finished:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork11requestJSONERR">requestJSON(methodType:urlStr:refreshCache:isCache:parameters:finished:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>请求JSON数据最底层</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">requestJSON</span><span class="p">(</span><span class="nv">methodType</span><span class="p">:</span> <span class="kt"><a href="../Enums/RequestType.html">RequestType</a></span><span class="p">,</span> <span class="nv">urlStr</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">refreshCache</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">isCache</span><span class="p">:</span><span class="kt">Bool</span><span class="p">,</span> <span class="nv">parameters</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span><span class="kt">Any</span><span class="p">]?,</span> <span class="nv">finished</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="n"><a href="../Classes/JHNetwork.html#/s:C9JHNetwork9JHNetwork11networkJSON">networkJSON</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>methodType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>GET/POST</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>urlStr</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>接口</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>refreshCache</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>是否刷新缓存,如果为false则返回缓存</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isCache</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>是否缓存</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>parameters</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>参数字典</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>finished</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>回调</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork14totalCacheSizeFT_Sd"></a>
+                    <a name="//apple_ref/swift/Method/totalCacheSize()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork14totalCacheSizeFT_Sd">totalCacheSize()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>获取网络数据缓存字节数</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">totalCacheSize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>网络数据缓存字节数</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9JHNetwork9JHNetwork11clearCachesFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/clearCaches()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9JHNetwork9JHNetwork11clearCachesFT_T_">clearCaches()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>清除网络数据缓存</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">clearCaches</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-02-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

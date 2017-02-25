@@ -1,0 +1,299 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/AppDelegate.swift",
+      "line": 12,
+      "symbol": "AppDelegate",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/AppDelegate.swift",
+      "line": 14,
+      "symbol": "AppDelegate.window",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/AppDelegate.swift",
+      "line": 17,
+      "symbol": "AppDelegate.application(_:didFinishLaunchingWithOptions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/AppDelegate.swift",
+      "line": 22,
+      "symbol": "AppDelegate.applicationWillResignActive(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/AppDelegate.swift",
+      "line": 27,
+      "symbol": "AppDelegate.applicationDidEnterBackground(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/AppDelegate.swift",
+      "line": 32,
+      "symbol": "AppDelegate.applicationWillEnterForeground(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/AppDelegate.swift",
+      "line": 36,
+      "symbol": "AppDelegate.applicationDidBecomeActive(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/AppDelegate.swift",
+      "line": 40,
+      "symbol": "AppDelegate.applicationWillTerminate(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": null,
+      "symbol": "JHNetwork",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": null,
+      "symbol": "JHNetwork",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 45,
+      "symbol": "RequestType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 46,
+      "symbol": "RequestType.GET",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 47,
+      "symbol": "RequestType.POST",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 50,
+      "symbol": "JHNetwork",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 52,
+      "symbol": "JHNetwork.shared",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 77,
+      "symbol": "JHNetwork.manager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 78,
+      "symbol": "JHNetwork.listen",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 115,
+      "symbol": "JHNetwork.getCacheForJSON(url:parameters:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 122,
+      "symbol": "JHNetwork.getForJSON(url:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 126,
+      "symbol": "JHNetwork.getForJSON(url:parameters:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 130,
+      "symbol": "JHNetwork.getForJSON(url:refreshCache:parameters:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 135,
+      "symbol": "JHNetwork.getNoCacheForJSON(url:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 139,
+      "symbol": "JHNetwork.getNoCacheForJSON(url:parameters:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 143,
+      "symbol": "JHNetwork.getNoCacheForJSON(url:refreshCache:parameters:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 148,
+      "symbol": "JHNetwork.postForJSON(url:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 152,
+      "symbol": "JHNetwork.postForJSON(url:parameters:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 156,
+      "symbol": "JHNetwork.postForJSON(url:refreshCache:parameters:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 161,
+      "symbol": "JHNetwork.postNoCacheForJSON(url:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 165,
+      "symbol": "JHNetwork.postNoCacheForJSON(url:parameters:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 169,
+      "symbol": "JHNetwork.postNoCacheForJSON(url:refreshCache:parameters:finished:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 516,
+      "symbol": "String.urlEncode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/JHNetwork/JHNetwork.swift",
+      "line": 520,
+      "symbol": "String.urlDecode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 13,
+      "symbol": "ViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 15,
+      "symbol": "ViewController.url2",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 16,
+      "symbol": "ViewController.url3",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 18,
+      "symbol": "ViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 25,
+      "symbol": "ViewController.test5()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 29,
+      "symbol": "ViewController.test4()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 33,
+      "symbol": "ViewController.test3()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 39,
+      "symbol": "ViewController.test2()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 52,
+      "symbol": "ViewController.test1()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork/JHNetwork/ViewController.swift",
+      "line": 64,
+      "symbol": "ViewController.didReceiveMemoryWarning()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/jonhory/Desktop/Computer/H_Github项目/JHNetwork"
+}
