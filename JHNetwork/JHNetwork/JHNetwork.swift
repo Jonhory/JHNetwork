@@ -218,11 +218,11 @@ extension JHNetwork{
             if response.result.isSuccess{
                 let value = response.result.value as Any?
                 let js = JSON(value as Any)
-                finished(js, nil)
                 // 如果刷新缓存并且缓存
                 if refreshCache && isCache {
                     self.cacheResponse(response: js, url: urlStr, parameters: parameters)
                 }
+                finished(js, nil)
             }else{
                 finished(nil, response.result.error as NSError?)
             }
@@ -265,6 +265,29 @@ extension JHNetwork{
             }
         }
         return total
+    }
+    
+    
+    /// 清除网络数据缓存
+    func clearCaches() {
+        DispatchQueue.global().async {
+            let path = self.cachePath()
+            var isDir: ObjCBool = false
+            FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
+            if isDir.boolValue {
+                do {
+                    try FileManager.default.removeItem(atPath: path)
+                    if self.enableInterfaceDebug{
+                        WLog("清除网络数据缓存成功🍎")
+                    }
+                } catch  {
+                    if self.enableInterfaceDebug{
+                        WLog("清除网络数据缓存失败 = \(error)")
+                    }
+                }
+                
+            }
+        }
     }
     
     //MARK: 私有方法

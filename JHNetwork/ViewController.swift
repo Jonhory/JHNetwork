@@ -22,6 +22,10 @@ class ViewController: UIViewController {
         test1()
     }
     
+    func test5() {
+        JHNetwork.shared.clearCaches()
+    }
+    
     func test4() {
         WLog(JHNetwork.shared.totalCacheSize())
     }
