@@ -209,7 +209,7 @@ extension JHNetwork{
                     let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
                     if js != nil {
                         finished(js, nil)
-                        networkLog(json: js, url: urlStr, params: parameters)
+                        networkLogSuccess(json: js, url: urlStr, params: parameters)
                         return
                     }
                 }
@@ -219,7 +219,7 @@ extension JHNetwork{
                 let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
                 if js != nil {
                     finished(js, nil)
-                    networkLog(json: js, url: urlStr, params: parameters)
+                    networkLogSuccess(json: js, url: urlStr, params: parameters)
                     return
                 }
             }
@@ -241,9 +241,10 @@ extension JHNetwork{
                     self.cacheResponse(response: js, url: urlStr, parameters: parameters)
                 }
                 finished(js, nil)
-                self.networkLog(json: js, url: urlStr, params: parameters)
+                self.networkLogSuccess(json: js, url: urlStr, params: parameters)
             }else{
                 finished(nil, response.result.error as NSError?)
+                self.networkLogFail(error: response.result.error as NSError?, url: urlStr, params: parameters)
             }
         }
         //请求数据
@@ -318,10 +319,28 @@ extension JHNetwork{
     ///   - json: 成功的回调
     ///   - url: 接口
     ///   - params: 参数
-    private func networkLog(json: JSON?, url: String, params: [String:Any]?) {
+    private func networkLogSuccess(json: JSON?, url: String, params: [String:Any]?) {
         if enableInterfaceDebug {
             let absolute = absoluteUrlWithPath(path: url)
-            WLog("\nRequest success, url ==>> \(absolute) \nparams ==>> \(params) \nresponse ==>> \(json)")
+            WLog("\n请求成功🍎, url ==>> \(absolute) \nparams ==>> \(params) \nresponse ==>> \(json)")
+        }
+    }
+    
+    
+    /// 失败的日志输出
+    ///
+    /// - Parameters:
+    ///   - error: 失败信息
+    ///   - url: 接口信息
+    ///   - params: 参数字典
+    private func networkLogFail(error: NSError?, url: String, params: [String:Any]?) {
+        if enableInterfaceDebug {
+            let absolute = absoluteUrlWithPath(path: url)
+            if error?.code == NSURLErrorCancelled {
+                WLog("\n请求被取消❌, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
+            }else{
+                WLog("\n请求错误❌, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
+            }
         }
     }
     

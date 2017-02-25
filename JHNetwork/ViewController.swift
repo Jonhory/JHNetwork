@@ -58,9 +58,9 @@ class ViewController: UIViewController {
 //        }
         
         JHNetwork.shared.getData(url: url2, refreshCache: true, parameters: nil) { (result, error) in
-//            print("result = \(result)")
-//            print("error = \(error)")
-            self.test4()
+        }
+        
+        JHNetwork.shared.getData(url: url2, refreshCache: true, parameters: nil) { (result, error) in
         }
 
         
