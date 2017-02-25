@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         JHNetwork.shared.getData(url: url2, refreshCache: true, parameters: nil) { (result, error) in
         }
         
-        JHNetwork.shared.getData(url: url2, refreshCache: true, parameters: nil) { (result, error) in
+        JHNetwork.shared.getData(url: url2, refreshCache: true, parameters: ["name":"jj"]) { (result, error) in
         }
 
         
@@ -77,10 +77,6 @@ class ViewController: UIViewController {
         //
         //        }
         
-        
-        JHNetwork.shared.listenNetworkReachabilityStatus { (status) in
-            
-        }
         JHNetwork.shared.shoulObtainLocalWhenUnconnected(shouldObtain: false)
     }
 

@@ -81,7 +81,7 @@ class JHNetwork{
     let listen = NetworkReachabilityManager()
     
     
-    /// 当检测到网络异常时,是否从本地提取数据,如果是并且缓存post或者缓存get回调，则发起网络状态监听
+    /// 当检测到网络异常时,是否从本地提取数据,如果是，则发起网络状态监听
     ///
     /// - Parameter shouldObtain: 是否从本地提取数据
     func shoulObtainLocalWhenUnconnected(shouldObtain:Bool) {
@@ -108,6 +108,7 @@ extension JHNetwork {
         }
         if listen?.isReachable == false {
             networkStatus = NetworkReachabilityManager.NetworkReachabilityStatus.notReachable
+            networkListen(networkStatus)
         }
     }
 }
@@ -208,6 +209,9 @@ extension JHNetwork{
                 if networkStatus == NetworkReachabilityManager.NetworkReachabilityStatus.unknown || networkStatus == NetworkReachabilityManager.NetworkReachabilityStatus.notReachable {
                     let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
                     if js != nil {
+                        if enableInterfaceDebug {
+                            WLog("🇨🇳因为无网络连接而读取缓存")
+                        }
                         finished(js, nil)
                         networkLogSuccess(json: js, url: urlStr, params: parameters)
                         return
@@ -218,6 +222,9 @@ extension JHNetwork{
             if !refreshCache {
                 let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
                 if js != nil {
+                    if enableInterfaceDebug {
+                        WLog("🇨🇳因为不刷新缓存而读取缓存")
+                    }
                     finished(js, nil)
                     networkLogSuccess(json: js, url: urlStr, params: parameters)
                     return
@@ -243,8 +250,23 @@ extension JHNetwork{
                 finished(js, nil)
                 self.networkLogSuccess(json: js, url: urlStr, params: parameters)
             }else{
-                finished(nil, response.result.error as NSError?)
-                self.networkLogFail(error: response.result.error as NSError?, url: urlStr, params: parameters)
+                let error = response.result.error as NSError?
+                if error != nil && error!.code < 0 && isCache {
+                    let js = self.getCacheResponseWithURL(url: urlStr, parameters: parameters)
+                    if js != nil {
+                        if self.enableInterfaceDebug {
+                            WLog("🇨🇳因为\(error)而读取缓存")
+                        }
+                        finished(js, nil)
+                        self.networkLogSuccess(json: js, url: urlStr, params: parameters)
+                    }else{
+                        finished(nil, error)
+                        self.networkLogFail(error: error, url: urlStr, params: parameters)
+                    }
+                }else{
+                    finished(nil, error)
+                    self.networkLogFail(error: error, url: urlStr, params: parameters)
+                }
             }
         }
         //请求数据
@@ -337,7 +359,7 @@ extension JHNetwork{
         if enableInterfaceDebug {
             let absolute = absoluteUrlWithPath(path: url)
             if error?.code == NSURLErrorCancelled {
-                WLog("\n请求被取消❌, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
+                WLog("\n请求被取消🏠, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
             }else{
                 WLog("\n请求错误❌, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
             }
@@ -431,7 +453,7 @@ extension JHNetwork{
         if data != nil {
             json = JSON(data!)
             if enableInterfaceDebug{
-                WLog("读取缓存的数据 URL = \(url)")
+                WLog("读取缓存的数据🚩 URL = \(absoluteGet)")
             }
         }
         
