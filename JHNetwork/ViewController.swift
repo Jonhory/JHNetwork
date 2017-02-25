@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        JHNetwork.shared.shoulObtainLocalWhenUnconnected(shouldObtain: true)
+        
         test1()
     }
     
