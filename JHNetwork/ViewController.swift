@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        JHNetwork.shared.shoulObtainLocalWhenUnconnected(shouldObtain: true)
         test1()
     }
     
@@ -58,8 +58,8 @@ class ViewController: UIViewController {
 //        }
         
         JHNetwork.shared.getData(url: url2, refreshCache: true, parameters: nil) { (result, error) in
-            print("result = \(result)")
-            print("error = \(error)")
+//            print("result = \(result)")
+//            print("error = \(error)")
             self.test4()
         }
 

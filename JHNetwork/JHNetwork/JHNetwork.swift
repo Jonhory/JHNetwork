@@ -72,7 +72,7 @@ class JHNetwork{
     /// 设置是否打印log信息
     var enableInterfaceDebug = true
     /// 网络异常时，是否从本地提取数据
-    private var shoulObtainLocalWhenUnconnected = true
+    var shoulObtainLocalWhenUnconnected = true
     
     /// 当前网络状态，默认WIFI，开启网络状态监听后有效
     var networkStatus = NetworkReachabilityManager.NetworkReachabilityStatus.reachable(.ethernetOrWiFi)
@@ -105,6 +105,9 @@ extension JHNetwork {
                 WLog("*** <<<Network Status Changed>>> ***:\(status)")
             }
             networkListen(status)
+        }
+        if listen?.isReachable == false {
+            networkStatus = NetworkReachabilityManager.NetworkReachabilityStatus.notReachable
         }
     }
 }
@@ -200,14 +203,29 @@ extension JHNetwork{
             return
         }
         //开始业务判断
-        //如果不刷新缓存，如果已存在缓存，则返回缓存，否则请求网络，但是不缓存数据
-        if !refreshCache {
-            let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
-            if js != nil {
-                finished(js, nil)
-                return
+        if isCache {
+            if shoulObtainLocalWhenUnconnected {
+                if networkStatus == NetworkReachabilityManager.NetworkReachabilityStatus.unknown || networkStatus == NetworkReachabilityManager.NetworkReachabilityStatus.notReachable {
+                    let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
+                    if js != nil {
+                        finished(js, nil)
+                        networkLog(json: js, url: urlStr, params: parameters)
+                        return
+                    }
+                }
+            }
+            //如果不刷新缓存，如果已存在缓存，则返回缓存，否则请求网络，但是不缓存数据
+            if !refreshCache {
+                let js = getCacheResponseWithURL(url: urlStr, parameters: parameters)
+                if js != nil {
+                    finished(js, nil)
+                    networkLog(json: js, url: urlStr, params: parameters)
+                    return
+                }
             }
         }
+        
+        
         
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = TimeInterval(timeout)
@@ -223,6 +241,7 @@ extension JHNetwork{
                     self.cacheResponse(response: js, url: urlStr, parameters: parameters)
                 }
                 finished(js, nil)
+                self.networkLog(json: js, url: urlStr, params: parameters)
             }else{
                 finished(nil, response.result.error as NSError?)
             }
@@ -292,6 +311,20 @@ extension JHNetwork{
     
     //MARK: 私有方法
     
+    
+    /// 成功的日志输出
+    ///
+    /// - Parameters:
+    ///   - json: 成功的回调
+    ///   - url: 接口
+    ///   - params: 参数
+    private func networkLog(json: JSON?, url: String, params: [String:Any]?) {
+        if enableInterfaceDebug {
+            let absolute = absoluteUrlWithPath(path: url)
+            WLog("\nRequest success, url ==>> \(absolute) \nparams ==>> \(params) \nresponse ==>> \(json)")
+        }
+    }
+    
     /// 将传入的参数字典转成字符串用于显示和判断唯一性，仅对一级字典结构有效
     ///
     /// - Parameters:
@@ -354,7 +387,7 @@ extension JHNetwork{
             if data != nil {
                 FileManager.default.createFile(atPath: path, contents: data, attributes: nil)
                 if enableInterfaceDebug {
-                    WLog("保存网络数据成功 path = \(path), \n url = \(absoluteGet)")
+                    WLog("保存网络数据成功 url = \(absoluteGet)")
                 }
             }
             
