@@ -19,7 +19,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        test2()
+        test3()
+    }
+    
+    func test3() {
+        JHNetwork.shared.getCache(url: url2, parameters: nil) { (js, _) in
+            WLog(js)
+        }
     }
     
     func test2() {

@@ -10,6 +10,38 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+//MARK:公共方法
+/// 自定义Log
+///
+/// - Parameters:
+///   - messsage: 正常输出内容
+///   - file: 文件名
+///   - funcName: 方法名
+///   - lineNum: 行数
+func WLog<T>(_ messsage : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
+    #if DEBUG
+        let fileName = (file as NSString).lastPathComponent
+        print("\(fileName):(\(lineNum))==>>>\(messsage)")
+    #endif
+}
+
+/// MD5加密
+///
+/// - Parameter str: 需要加密的字符串
+/// - Returns: 32位大写加密
+func md5String(str:String) -> String{
+    let cStr = str.cString(using: String.Encoding.utf8);
+    let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
+    CC_MD5(cStr!,(CC_LONG)(strlen(cStr!)), buffer)
+    let md5String = NSMutableString();
+    for i in 0 ..< 16{
+        md5String.appendFormat("%02x", buffer[i])
+    }
+    free(buffer)
+    return md5String as String
+}
+//MARK:
+
 enum RequestType:Int {
     case GET
     case POST
@@ -60,24 +92,6 @@ class JHNetwork{
 
 // MARK: - 公共工具
 extension JHNetwork {
-    
-    /// MD5加密
-    ///
-    /// - Parameter str: 需要加密的字符串
-    /// - Returns: 32位大写加密
-    func md5String(str:String) -> String{
-        let cStr = str.cString(using: String.Encoding.utf8);
-        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
-        CC_MD5(cStr!,(CC_LONG)(strlen(cStr!)), buffer)
-        let md5String = NSMutableString();
-        for i in 0 ..< 16{
-            md5String.appendFormat("%02x", buffer[i])
-        }
-        free(buffer)
-        return md5String as String
-    }
-    
-    
     /// 监听网络状态
     ///
     /// - Parameter networkListen: 网络状态回调
@@ -93,7 +107,13 @@ extension JHNetwork {
 
 // MARK: - 网络请求相关
 extension JHNetwork{
-  
+    //MARK:获取缓存
+    func getCache(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) {
+        getData(url: url, refreshCache: false, parameters: parameters) { (js, error) in
+            finished(js, nil)
+        }
+    }
+    
     //MARK:缓存GET
     func getData(url: String, finished: @escaping networkJSON) {
         getData(url: url, parameters: nil, finished: finished)
