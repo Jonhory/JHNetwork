@@ -4,7 +4,7 @@
 //
 //  Created by Jonhory on 2017/2/21.
 //  Copyright © 2017年 com.wujh. All rights reserved.
-//
+//  
 
 import UIKit
 import Alamofire
@@ -208,8 +208,8 @@ extension JHNetwork {
                         if isDebug {
                             WLog("🇨🇳因为无网络连接而读取缓存")
                         }
-                        finished(js, nil)
                         networkLogSuccess(json: js, url: urlStr, params: parameters)
+                        finished(js, nil)
                         return
                     }
                 }
@@ -221,8 +221,8 @@ extension JHNetwork {
                     if isDebug {
                         WLog("🇨🇳因为不刷新缓存而读取缓存")
                     }
-                    finished(js, nil)
                     networkLogSuccess(json: js, url: urlStr, params: parameters)
+                    finished(js, nil)
                     return
                 }
             }
@@ -241,8 +241,8 @@ extension JHNetwork {
                 if refreshCache && isCache {
                     self.cacheResponse(response: js, url: urlStr, parameters: parameters)
                 }
-                finished(js, nil)
                 self.networkLogSuccess(json: js, url: urlStr, params: parameters)
+                finished(js, nil)
             } else {
                 let error = response.result.error as NSError?
                 if error != nil && error!.code < 0 && isCache {
@@ -251,15 +251,15 @@ extension JHNetwork {
                         if self.isDebug {
                             WLog("🇨🇳因为\(error)而读取缓存")
                         }
-                        finished(js, nil)
                         self.networkLogSuccess(json: js, url: urlStr, params: parameters)
+                        finished(js, nil)
                     } else {
-                        finished(nil, error)
                         self.networkLogFail(error: error, url: urlStr, params: parameters)
+                        finished(nil, error)
                     }
                 } else {
-                    finished(nil, error)
                     self.networkLogFail(error: error, url: urlStr, params: parameters)
+                    finished(nil, error)
                 }
             }
         }

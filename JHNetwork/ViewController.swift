@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
+import ObjectMapper
 
 class ViewController: UIViewController {
 
     let url2 = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=218.4.255.255"
     let url3 = "http://www.baidu.com/"
+    
+    var area: Area? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,14 @@ class ViewController: UIViewController {
         params?["hehe"] = [:]
         
         JHNetwork.shared.getCacheForJSON(url: url2, parameters: params) { (js, _) in
-//            WLog(js)
+            WLog(js)
+            if js != nil {
+                self.area = Mapper<Area>().map(JSON: (js!.dictionaryObject)!)
+//                print("area = \(self.area)")
+                print("js.city = \(js?["city"]["jj"])")
+                
+                
+            }
         }
     }
     
