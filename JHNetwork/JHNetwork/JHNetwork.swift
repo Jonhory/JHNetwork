@@ -29,7 +29,7 @@ func WLog<T>(_ messsage: T, file: String = #file, funcName: String = #function, 
 ///
 /// - Parameter str: 需要加密的字符串
 /// - Returns: 32位大写加密
-func md5String(str: String) -> String {
+func md5(_ str: String) -> String {
     let cStr = str.cString(using: String.Encoding.utf8)
     let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
     CC_MD5(cStr!,(CC_LONG)(strlen(cStr!)), buffer)
@@ -103,7 +103,7 @@ extension JHNetwork {
             networkListen(status)
         }
         if listen?.isReachable == false {
-            networkStatus = NetworkReachabilityManager.NetworkReachabilityStatus.notReachable
+            networkStatus = .notReachable
             networkListen(networkStatus)
         }
     }
@@ -407,7 +407,7 @@ extension JHNetwork {
             }
             let absolute = absoluteUrl(path: url)
             let absoluteGet = generateGETAbsoluteURL(url: absolute, params: parameters)
-            let key = md5String(str: absoluteGet)
+            let key = md5(absoluteGet)
             let path = directoryPath.appending("/\(key)")
             var data:Data? = nil
             do {
@@ -439,7 +439,7 @@ extension JHNetwork {
         let directoryPath = cachePath()
         let absolute = absoluteUrl(path: url)
         let absoluteGet = generateGETAbsoluteURL(url: absolute, params: parameters)
-        let key = md5String(str: absoluteGet)
+        let key = md5(absoluteGet)
         let path = directoryPath.appending("/\(key)")
         let data = FileManager.default.contents(atPath: path)
         if data != nil {
