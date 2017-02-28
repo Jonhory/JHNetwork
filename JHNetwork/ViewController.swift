@@ -19,8 +19,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         test3()
+        test1()
+        test2()
     }
     
     func test5() {
@@ -54,7 +55,7 @@ class ViewController: UIViewController {
     func test2() {
         JHNetwork.shared.baseUrl = url3
         let par: [String: Any]? = [:]
-        JHNetwork.shared.encodeAble = true
+//        JHNetwork.shared.encodeAble = true
         JHNetwork.shared.getNoCacheForJSON(url: "s/wd=你好", parameters: par) { (re, er) in
             if er != nil {
                 print("error = \(er)")
@@ -64,14 +65,21 @@ class ViewController: UIViewController {
         }
     }
     
+    var i = 0
+    
     func test1() {
         JHNetwork.shared.baseUrl = "http://int.dpool.sina.com.cn"
         
+        
         JHNetwork.shared.getForJSON(url: url2, refreshCache: true, parameters: nil) { (result, error) in
+            if self.i < 2 {
+                self.i += 1
+                self.test1()
+            }
         }
         
-        JHNetwork.shared.getForJSON(url: url2, refreshCache: true, parameters: ["name":"jj"]) { (result, error) in
-        }
+//        JHNetwork.shared.getForJSON(url: url2, refreshCache: true, parameters: ["name":"jj"]) { (result, error) in
+//        }
         
         JHNetwork.shared.shoulObtainLocalWhenUnconnected(shouldObtain: false)
     }

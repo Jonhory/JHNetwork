@@ -62,7 +62,7 @@ class JHNetwork {
     /// 网络基础url
     var baseUrl:String? = nil
     /// 请求超时
-    var timeout = 15
+    var timeout = 20
     ///配置公共请求头
     var httpHeader:HTTPHeaders? = nil
     /// 是否自动ecode
@@ -195,7 +195,7 @@ extension JHNetwork {
         let URL: NSURL? = NSURL(string: absolute!)
         if URL == nil {
             if isDebug {
-                WLog("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL")
+                WLog("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL, absolute = \(absolute)")
             }
             return
         }
@@ -228,9 +228,11 @@ extension JHNetwork {
             }
         }
         
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = TimeInterval(timeout)
-        manager = Alamofire.SessionManager(configuration: config)
+        if manager == nil {
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = TimeInterval(timeout)
+            manager = Alamofire.SessionManager(configuration: config)
+        }
         
         //定义请求结果回调闭包
         let resultCallBack = { (response: DataResponse<Any>) in
