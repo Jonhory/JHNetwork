@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        test1()
+        test3()
     }
     
     func test5() {
@@ -31,8 +31,13 @@ class ViewController: UIViewController {
     }
     
     func test3() {
-        JHNetwork.shared.getCacheForJSON(url: url2, parameters: nil) { (js, _) in
-            WLog(js)
+        var params: [String: Any]? = [:]
+        params?["haha"] = [1,2,3,4]
+        params?["nihao"] = "jjj"
+        params?["hehe"] = [:]
+        
+        JHNetwork.shared.getCacheForJSON(url: url2, parameters: params) { (js, _) in
+//            WLog(js)
         }
     }
     

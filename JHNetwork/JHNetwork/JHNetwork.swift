@@ -372,14 +372,10 @@ extension JHNetwork {
         if params != nil {
             let par = appendDefaultParameter(params: params)
             for (key,value):(String,Any) in par! {
-                if value is String {
-                    absoluteUrl = absoluteUrl + "&" + key + "=" + (value as! String)
-                }else if value is Int {
-                    absoluteUrl = absoluteUrl + "&" + key + "=" + "\(value as! Int)"
-                }else if value is Double {
-                    absoluteUrl = absoluteUrl + "&" + key + "=" + "\(value as! Double)"
-                }else if value is Float {
-                    absoluteUrl = absoluteUrl + "&" + key + "=" + "\(value as! Float)"
+                if value is [Any] || value is [AnyHashable: Any] || value is Set<AnyHashable> {
+                    continue
+                } else {
+                    absoluteUrl = "\(absoluteUrl)&\(key)=\(value)"
                 }
             }
         }
