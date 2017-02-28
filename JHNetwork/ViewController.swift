@@ -37,16 +37,18 @@ class ViewController: UIViewController {
         params?["nihao"] = "jjj"
         params?["hehe"] = [:]
         
-        JHNetwork.shared.getCacheForJSON(url: url2, parameters: params) { (js, _) in
-            WLog(js)
-            if js != nil {
-                self.area = Mapper<Area>().map(JSON: (js!.dictionaryObject)!)
-//                print("area = \(self.area)")
-                print("js.city = \(js?["city"]["jj"])")
-                
-                
-            }
-        }
+//        JHNetwork.shared.getCacheForJSON(url: url2, parameters: params) { (js, _) in
+//            WLog(js)
+//            if js != nil {
+//                self.area = Mapper<Area>().map(JSON: (js!.dictionaryObject)!)
+////                print("area = \(self.area)")
+//                print("js.city = \(js?["city"]["jj"])")
+//                
+//                
+//            }
+//        }
+        
+        JHNetwork.shared.getCacheForJSON(url: url2, parameters: params) { print($0) }
     }
     
     func test2() {
