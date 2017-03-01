@@ -19,9 +19,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        test3()
-        test1()
-        test2()
+        test6()
+    }
+    
+    func test6() {
+        JHNetwork.shared.getForJSON(url: "http://www.baidu.com") { (js, error) in
+            
+        }
     }
     
     func test5() {

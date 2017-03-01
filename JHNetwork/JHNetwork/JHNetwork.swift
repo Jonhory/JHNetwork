@@ -357,7 +357,7 @@ extension JHNetwork {
             if error?.code == NSURLErrorCancelled {
                 WLog("\n请求被取消🏠, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
             } else {
-                WLog("\n请求错误❌, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
+                WLog("\n请求错误, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
             }
         }
     }
