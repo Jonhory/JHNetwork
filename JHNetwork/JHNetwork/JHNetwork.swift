@@ -21,7 +21,7 @@ import SwiftyJSON
 func WLog<T>(_ messsage: T, file: String = #file, funcName: String = #function, lineNum: Int = #line) {
     #if DEBUG
         let fileName = (file as NSString).lastPathComponent
-        print("\(fileName):(\(lineNum))==>>>\(messsage)")
+        print("\(fileName):(\(lineNum))======>>>>>>\n\(messsage)")
     #endif
 }
 
@@ -291,14 +291,14 @@ extension JHNetwork {
                         total += Double(dict.fileSize())
                     } catch  {
                         if isDebug {
-                            WLog("失败==\(error)")
+                            WLog("‼️失败==\(error)")
                         }
                     }
                     
                 }
             } catch  {
                 if isDebug {
-                    WLog("失败==\(error)")
+                    WLog("‼️失败==\(error)")
                 }
             }
         }
@@ -320,7 +320,7 @@ extension JHNetwork {
                     }
                 } catch  {
                     if self.isDebug {
-                        WLog("清除网络数据缓存失败 = \(error)")
+                        WLog("清除网络数据缓存失败‼️ \(error)")
                     }
                 }
                 
@@ -340,7 +340,7 @@ extension JHNetwork {
     private func networkLogSuccess(json: JSON?, url: String, params: [String:Any]?) {
         if isDebug {
             let absolute = absoluteUrl(path: url)
-            WLog("\n请求成功🍎, url ==>> \(absolute) \nparams ==>> \(params) \nresponse ==>> \(json)")
+            WLog("请求成功🍎, 🌏 \(absolute) \nparams ==>> \(params) \nresponse ==>> \(json)")
         }
     }
     
@@ -355,9 +355,9 @@ extension JHNetwork {
         if isDebug {
             let absolute = absoluteUrl(path: url)
             if error?.code == NSURLErrorCancelled {
-                WLog("\n请求被取消🏠, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
+                WLog("请求被取消🏠, 🌏 \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
             } else {
-                WLog("\n请求错误, url ==>> \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
+                WLog("请求错误, 🌏 \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
             }
         }
     }
@@ -402,7 +402,7 @@ extension JHNetwork {
                     try FileManager.default.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
                 } catch {
                     if isDebug {
-                        WLog("创建文件夹失败 error = \(error)")
+                        WLog("创建文件夹失败 ‼️ \(error)")
                     }
                     return
                 }
@@ -416,13 +416,13 @@ extension JHNetwork {
                 data = try JSONSerialization.data(withJSONObject: response?.dictionaryObject ?? [:], options: .prettyPrinted)
             } catch  {
                 if isDebug {
-                    WLog("Data error = \(error)")
+                    WLog("‼️ \(error)")
                 }
             }
             if data != nil {
                 FileManager.default.createFile(atPath: path, contents: data, attributes: nil)
                 if isDebug {
-                    WLog("保存网络数据成功 url = \(absoluteGet)")
+                    WLog("保存网络数据成功 🌏 \(absoluteGet)")
                 }
             }
             
@@ -447,7 +447,7 @@ extension JHNetwork {
         if data != nil {
             json = JSON(data!)
             if isDebug {
-                WLog("读取缓存的数据🚩 URL = \(absoluteGet)")
+                WLog("读取缓存的数据 🌏 \(absoluteGet)")
             }
         }
         
