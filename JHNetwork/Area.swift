@@ -36,3 +36,14 @@ class Area: Mappable {
         country <- map["country"]
     }
 }
+
+class Country : Area {
+    var name: String?
+    var area: Area?
+    var areas: [Area]?
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        name <- map["name"]
+    }
+}
