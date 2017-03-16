@@ -265,9 +265,10 @@ extension JHNetwork {
                 }
             }
         }
+        let param = appendDefaultParameter(params: parameters)
         //正式发起网络请求
         let httpMethod:HTTPMethod = methodType == .GET ? .get : .post
-        return manager.request(absolute!, method: httpMethod, parameters: parameters, encoding: JSONEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
+        return manager.request(absolute!, method: httpMethod, parameters: param, encoding: JSONEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
     }
     
     
@@ -339,7 +340,8 @@ extension JHNetwork {
     private func networkLogSuccess(json: JSON?, url: String, params: [String:Any]?) {
         if isDebug {
             let absolute = absoluteUrl(path: url)
-            WLog("请求成功🍎, 🌏 \(absolute) \nparams ==>> \(params) \nresponse ==>> \(json)")
+            let param = appendDefaultParameter(params: params)
+            WLog("请求成功🍎, 🌏 \(absolute) \nparams ==>> \(param) \nresponse ==>> \(json)")
         }
     }
     
@@ -353,10 +355,11 @@ extension JHNetwork {
     private func networkLogFail(error: NSError?, url: String, params: [String:Any]?) {
         if isDebug {
             let absolute = absoluteUrl(path: url)
+            let param = appendDefaultParameter(params: params)
             if error?.code == NSURLErrorCancelled {
-                WLog("请求被取消🏠, 🌏 \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
+                WLog("请求被取消🏠, 🌏 \(absolute) \nparams ==>> \(param) \n错误信息❌ ==>> \(error)")
             } else {
-                WLog("请求错误, 🌏 \(absolute) \nparams ==>> \(params) \n错误信息❌ ==>> \(error)")
+                WLog("请求错误, 🌏 \(absolute) \nparams ==>> \(param) \n错误信息❌ ==>> \(error)")
             }
         }
     }
