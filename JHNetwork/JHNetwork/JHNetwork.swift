@@ -267,7 +267,7 @@ extension JHNetwork {
         }
         //正式发起网络请求
         let httpMethod:HTTPMethod = methodType == .GET ? .get : .post
-        return manager.request(absolute!, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
+        return manager.request(absolute!, method: httpMethod, parameters: parameters, encoding: JSONEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
     }
     
     
