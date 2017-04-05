@@ -7,7 +7,7 @@
 * [代码示例](#代码示例)
 
 ## <a id="介绍"></a> 介绍:
-* 使用Swift3.0，基于[Alamofire4.0+](https://github.com/Alamofire/Alamofire)、[SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)封装的网络中间层，提供快速缓存策略，帮助日常开发。
+* 使用Swift3.1，基于[Alamofire4.0+](https://github.com/Alamofire/Alamofire)、[SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)封装的网络中间层，提供快速缓存策略，帮助日常开发。
 * 实现了GET／POST请求JSON数据，可定义每一个请求是否缓存成功的回调数据。
 * 利用请求的url拼接传入的参数字典，形成唯一性的字符串，经过MD5加密后保存至`Library/Caches/JHNetworkCaches`文件夹，该路径可自行修改。
 * 当调用一个请求方法时，会经过以下逻辑判断处理：
@@ -117,6 +117,9 @@ totalCacheSize()
 ```
 clearCaches()
 ```
+
+## 灵感
+* 灵感来自于[HYBNetworking](https://github.com/CoderJackyHuang/HYBNetworking)。
 
 ## 联系我
 * 如果在使用过程中遇到问题，或者想要与我分享，吐槽我<jonhory@163.com>
