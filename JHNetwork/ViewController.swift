@@ -55,7 +55,7 @@ class ViewController: UIViewController {
             if js != nil {
                 let a = Mapper<Country>().map(JSON: (js!.dictionaryObject)!)
 //                print("area = \(self.area)")
-                print("js.city = \(a?.city)")
+                print("js.city = \(String(describing: a?.city))")
                 
                 
             }
@@ -70,9 +70,9 @@ class ViewController: UIViewController {
 //        JHNetwork.shared.encodeAble = true
         _ = JHNetwork.shared.getNoCacheForJSON(url: "s/wd=你好", parameters: par) { (re, er) in
             if er != nil {
-                print("error = \(er)")
+                print("error = \(String(describing: er))")
             }else{
-                print("response = \(re)")
+                print("response = \(String(describing: re))")
             }
         }
     }

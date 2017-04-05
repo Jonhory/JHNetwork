@@ -188,14 +188,14 @@ extension JHNetwork {
         if encodeAble {
             absolute = absolute?.urlEncode
             if isDebug {
-                WLog("Encode URL ===>>>>\(absolute)")
+                WLog("Encode URL ===>>>>\(String(describing: absolute))")
             }
         }
         
         let URL: NSURL? = NSURL(string: absolute!)
         if URL == nil {
             if isDebug {
-                WLog("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL, absolute = \(absolute)")
+                WLog("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL, absolute = \(String(describing: absolute))")
             }
             return nil
         }
@@ -251,7 +251,7 @@ extension JHNetwork {
                     let js = self.getCacheResponse(url: urlStr, parameters: parameters)
                     if js != nil {
                         if self.isDebug {
-                            WLog("🇨🇳因为\(error)而读取缓存")
+                            WLog("🇨🇳因为\(String(describing: error))而读取缓存")
                         }
                         self.networkLogSuccess(json: js, url: urlStr, params: parameters)
                         finished(js, nil)
@@ -341,7 +341,7 @@ extension JHNetwork {
         if isDebug {
             let absolute = absoluteUrl(path: url)
             let param = appendDefaultParameter(params: params)
-            WLog("请求成功🍎, 🌏 \(absolute) \nparams ==>> \(param) \nresponse ==>> \(json)")
+            WLog("请求成功🍎, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \nresponse ==>> \(String(describing: json))")
         }
     }
     
@@ -357,9 +357,9 @@ extension JHNetwork {
             let absolute = absoluteUrl(path: url)
             let param = appendDefaultParameter(params: params)
             if error?.code == NSURLErrorCancelled {
-                WLog("请求被取消🏠, 🌏 \(absolute) \nparams ==>> \(param) \n错误信息❌ ==>> \(error)")
+                WLog("请求被取消🏠, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error))")
             } else {
-                WLog("请求错误, 🌏 \(absolute) \nparams ==>> \(param) \n错误信息❌ ==>> \(error)")
+                WLog("请求错误, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error))")
             }
         }
     }
