@@ -111,13 +111,6 @@ extension JHNetwork {
 
 // MARK: - 网络请求相关
 extension JHNetwork {
-    //MARK:获取缓存
-    func getCacheForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
-        return getForJSON(url: url, refreshCache: false, parameters: parameters) { (js, error) in
-            finished(js, nil)
-        }
-    }
-    
     //MARK:缓存GET
     func getForJSON(url: String, finished: @escaping networkJSON) -> Cancellable? {
         return getForJSON(url: url, parameters: nil, finished: finished)
@@ -271,6 +264,13 @@ extension JHNetwork {
         return manager.request(absolute!, method: httpMethod, parameters: param, encoding: JSONEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
     }
     
+    //MARK: - 缓存相关
+    /// 获取缓存
+    func getCacheForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
+        return getForJSON(url: url, refreshCache: false, parameters: parameters) { (js, error) in
+            finished(js, nil)
+        }
+    }
     
     /// 获取网络数据缓存字节数
     ///
