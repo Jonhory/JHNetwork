@@ -100,6 +100,8 @@ requestJSON(methodType:urlStr:refreshCache:isCache:parameters:finished:)
 
 ```
 
+* 每个请求都返回`Cancellable?`,可调用`cancel()`方法取消该请求
+
 * 尝试获取指定url和参数的缓存
 
 ```
