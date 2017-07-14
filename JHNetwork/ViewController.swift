@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         
         test7()
         test1()
+        
     }
     
     func test7() {
@@ -70,9 +71,9 @@ class ViewController: UIViewController {
 //        JHNetwork.shared.encodeAble = true
         _ = JHNetwork.shared.getNoCacheForJSON(url: "s/wd=你好", parameters: par) { (re, er) in
             if er != nil {
-                print("error = \(String(describing: er))")
+                print("error = \(String(describing: er!))")
             }else{
-                print("response = \(String(describing: re))")
+                print("response = \(String(describing: re ?? "nil resp"))")
             }
         }
     }

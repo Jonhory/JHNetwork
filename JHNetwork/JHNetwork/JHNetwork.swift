@@ -183,22 +183,12 @@ extension JHNetwork {
     ///   - finished: 回调
     func requestJSON(methodType: RequestType, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
         
-        var absolute: String? = nil
-        absolute = absoluteUrl(path: urlStr)
-        if encodeAble {
-            absolute = absolute?.urlEncode
-            if isDebug {
-                WLog("Encode URL ===>>>>\(String(describing: absolute))")
-            }
-        }
-        
-        let URL: NSURL? = NSURL(string: absolute!)
-        if URL == nil {
-            if isDebug {
-                WLog("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL, absolute = \(String(describing: absolute))")
-            }
+        let ready = readySendRequest(urlStr: urlStr)
+        if ready.0 == false {
             return nil
         }
+        let absolute = ready.1
+        
         //开始业务判断
         if isCache {
             if shoulObtainLocalWhenUnconnected {
@@ -226,12 +216,6 @@ extension JHNetwork {
                     return nil
                 }
             }
-        }
-        
-        if manager == nil {
-            let config = URLSessionConfiguration.default
-            config.timeoutIntervalForRequest = TimeInterval(timeout)
-            manager = Alamofire.SessionManager(configuration: config)
         }
         
         //定义请求结果回调闭包
@@ -269,6 +253,66 @@ extension JHNetwork {
         //正式发起网络请求
         let httpMethod:HTTPMethod = methodType == .GET ? .get : .post
         return manager.request(absolute!, method: httpMethod, parameters: param, encoding: JSONEncoding.default, headers: httpHeader).responseJSON(completionHandler: resultCallBack)
+    }
+    
+    // MARK: 上传图片数组, 图片数组的 key 是 images 使用multipart/form-data格式提交图片
+    func upload(par: [String: Any] , urlStr: String, finished: @escaping networkJSON) {
+        
+        let ready = readySendRequest(urlStr: urlStr)
+        if ready.0 == false {
+            return
+        }
+        let absolute = ready.1
+        
+        let param = appendDefaultParameter(params: par)
+        
+        let headers = ["content-type" : "multipart/form-data"]
+        
+        manager.upload(multipartFormData: { (formData) in
+            
+            for (key, value) in param! {
+                if key == "images" {
+                    if let images = value as? [UIImage] {
+                        for i in 0..<images.count {
+                            let image = images[i]
+                            if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+                                formData.append(imageData, withName: "iOSImage\(i)", fileName: "image\(i).png", mimeType: "image/png")
+                            }
+                        }
+                    }
+                } else {
+                    if let va = value as? String {
+                        if let vaData = va.data(using: .utf8) {
+                            formData.append(vaData, withName: key)
+                        }
+                    }
+                }
+            }
+            
+        }, to: absolute!, headers: headers) { (encodingResult) in
+            
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseJSON(completionHandler: { (resp) in
+                    if resp.result.isSuccess {
+                        let value = resp.result.value as Any?
+                        let js = JSON(value as Any)
+                        self.networkLogSuccess(json: js, url: urlStr, params: nil)
+                        finished(js, nil)
+                    } else {
+                        let error = resp.result.error as NSError?
+                        self.networkLogFail(error: error, url: urlStr, params: nil)
+                        finished(nil, error)
+                    }
+                })
+                break
+            case .failure(let error):
+                let err = error as NSError?
+                finished(nil, err)
+                break
+            }
+        }
+        
     }
     
     /// 获取网络数据缓存字节数
@@ -329,6 +373,33 @@ extension JHNetwork {
     
     //MARK: 私有方法
     
+    // MARK: 准备工作
+    private func readySendRequest(urlStr: String) -> (Bool, String?) {
+        var absolute: String? = nil
+        absolute = absoluteUrl(path: urlStr)
+        if encodeAble {
+            absolute = absolute?.urlEncode
+            if isDebug {
+                WLog("Encode URL ===>>>>\(absolute.orNil)")
+            }
+        }
+        
+        let URL: NSURL? = NSURL(string: absolute!)
+        if URL == nil {
+            if isDebug {
+                WLog("URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL, absolute = \(absolute.orNil)")
+            }
+            return (false, nil)
+        }
+        
+        if manager == nil {
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = TimeInterval(timeout)
+            manager = Alamofire.SessionManager(configuration: config)
+        }
+        
+        return (true, absolute!)
+    }
     
     /// 成功的日志输出
     ///
@@ -526,3 +597,15 @@ protocol Cancellable {
 }
 
 extension Request: Cancellable {}
+
+extension Optional {
+    var orNil : String {
+        if self == nil {
+            return ""
+        }
+        if "\(Wrapped.self)" == "String" {
+            return "\(self!)"
+        }
+        return "\(self!)"
+    }
+}

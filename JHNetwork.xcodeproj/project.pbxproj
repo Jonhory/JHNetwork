@@ -16,6 +16,7 @@
 		BB7803471E5C735A00A5920B /* JHNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803461E5C735A00A5920B /* JHNetworkTests.swift */; };
 		BB7803521E5C735A00A5920B /* JHNetworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803511E5C735A00A5920B /* JHNetworkUITests.swift */; };
 		BB7803611E5C73E800A5920B /* JHNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803601E5C73E800A5920B /* JHNetwork.swift */; };
+		BB7C8FD61F18A96C0075F795 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7C8FD51F18A96C0075F795 /* star@2x.png */; };
 		E316A6943CEBE0BF6CAE9179 /* Pods_JHNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8039C95E33E4C812C80851F4 /* Pods_JHNetwork.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		BB7803531E5C735A00A5920B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB7803601E5C73E800A5920B /* JHNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHNetwork.swift; sourceTree = "<group>"; };
 		BB7803641E5C812600A5920B /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
+		BB7C8FD51F18A96C0075F795 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		D0FCCE5716EC05AE1880E983 /* Pods_JHNetworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JHNetworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 				BB7803331E5C735A00A5920B /* ViewController.swift */,
 				BB2129A51E6564A0000E657D /* Area.swift */,
 				BB78033D1E5C735A00A5920B /* Info.plist */,
+				BB7C8FD51F18A96C0075F795 /* star@2x.png */,
 				BB70D58E1E601B4B009304EC /* JHNetwork-Bridging-Header.h */,
 				BB7803381E5C735A00A5920B /* Assets.xcassets */,
 				BB78033A1E5C735A00A5920B /* LaunchScreen.storyboard */,
@@ -299,6 +302,7 @@
 				BB78033C1E5C735A00A5920B /* LaunchScreen.storyboard in Resources */,
 				BB7803391E5C735A00A5920B /* Assets.xcassets in Resources */,
 				BB7803371E5C735A00A5920B /* Main.storyboard in Resources */,
+				BB7C8FD61F18A96C0075F795 /* star@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +537,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = JHNetwork/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = jonhory.JHNetwork;
@@ -554,6 +559,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = JHNetwork/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = jonhory.JHNetwork;
