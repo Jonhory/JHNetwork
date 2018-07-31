@@ -7,21 +7,16 @@
 //
 
 import UIKit
-import ObjectMapper
 
 class ViewController: UIViewController {
 
     let url2 = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=218.4.255.255"
-    let url3 = "http://www.baidu.com/"
-    
-    var area: Area? = nil
+    let url3 = "https://www.sojson.com"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        test7()
-        test1()
-        
+        test2()
     }
     
     func test7() {
@@ -30,6 +25,8 @@ class ViewController: UIViewController {
         }
         task?.cancel()
     }
+    
+    
     
     func test6() {
         _ = JHNetwork.shared.getForJSON(url: "http://www.baidu.com") { (js, error) in
@@ -52,14 +49,7 @@ class ViewController: UIViewController {
         params?["hehe"] = [:]
         
         _ = JHNetwork.shared.getCacheForJSON(url: url2, parameters: params) { (js, _) in
-            WLog(js)
-            if js != nil {
-                let a = Mapper<Country>().map(JSON: (js!.dictionaryObject)!)
-//                print("area = \(self.area)")
-                print("js.city = \(String(describing: a?.city))")
-                
-                
-            }
+            
         }
         
 //        JHNetwork.shared.getCacheForJSON(url: url2, parameters: params) { print($0) }
@@ -68,8 +58,8 @@ class ViewController: UIViewController {
     func test2() {
         JHNetwork.shared.baseUrl = url3
         let par: [String: Any]? = [:]
-//        JHNetwork.shared.encodeAble = true
-        _ = JHNetwork.shared.getNoCacheForJSON(url: "s/wd=你好", parameters: par) { (re, er) in
+        JHNetwork.shared.encodeAble = true
+        _ = JHNetwork.shared.getNoCacheForJSON(url: "/open/api/weather/json.shtml?city=北京", parameters: par) { (re, er) in
             if er != nil {
                 print("error = \(String(describing: er!))")
             }else{

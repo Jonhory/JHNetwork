@@ -1,4 +1,4 @@
-# Swift3.1网络层封装
+# Swift4.1网络层封装
 
 ## 导航
 * [介绍](#介绍)
@@ -7,7 +7,7 @@
 * [代码示例](#代码示例)
 
 ## <a id="介绍"></a> 介绍:
-* 使用Swift3.1，基于[Alamofire4.0+](https://github.com/Alamofire/Alamofire)、[SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)封装的网络中间层，提供快速缓存策略，帮助日常开发。
+* 使用Swift4.1，基于[Alamofire4.0+](https://github.com/Alamofire/Alamofire)、[SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)封装的网络中间层，提供快速缓存策略，帮助日常开发。
 * 实现了GET／POST请求JSON数据，可定义每一个请求是否缓存成功的回调数据。
 * 利用请求的url拼接传入的参数字典，形成唯一性的字符串，经过MD5加密后保存至`Library/Caches/JHNetworkCaches`文件夹，该路径可自行修改。
 * 当调用一个请求方法时，会经过以下逻辑判断处理：
@@ -25,12 +25,7 @@
 	8. 失败回调的处理
 		* 如果`error.code < 0` 且 `isCache`,尝试获取缓存，若有缓存，则返回**成功**的回调
 		* 返回**失败**的回调
- 
 
-## <a id="TODO"></a> TODO:
-* 上传相关请求
-  * [2017年07月14日] 实现 form-data 上传图片的方法
-* 下载相关请求
 
 ## <a id="快速接入"></a>快速接入:
 * 将`JHNetwork.swift`拖入项目中
@@ -101,6 +96,18 @@ requestJSON(methodType:urlStr:refreshCache:isCache:parameters:finished:)
 
 ```
 
+* 上传图片数组
+
+```
+/// 上传图片数组
+///
+/// - Parameters:
+///   - par: key是 images ，value是 UIImage
+///   - urlStr: 上传路径
+///   - finished: 回调
+upload(par: [String: Any] , urlStr: String, finished: @escaping networkJSON)
+```
+
 * 每个请求都返回`Cancellable?`,可调用`cancel()`方法取消该请求
 
 * 尝试获取指定url和参数的缓存
@@ -125,7 +132,7 @@ clearCaches()
 * 灵感来自于[HYBNetworking](https://github.com/CoderJackyHuang/HYBNetworking)。
 
 ## 联系我
-* 如果在使用过程中遇到问题，或者想要与我分享，吐槽我<jonhory@163.com>
+* 如果在使用过程中遇到问题，或者想要与我分享，吐槽我 <jonhory@163.com>
 
 ## License
 * JHNetwork is released under the MIT license. See LICENSE for details.

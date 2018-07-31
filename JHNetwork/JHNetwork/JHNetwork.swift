@@ -256,6 +256,13 @@ extension JHNetwork {
     }
     
     // MARK: 上传图片数组, 图片数组的 key 是 images 使用multipart/form-data格式提交图片
+    
+    /// 上传图片数组
+    ///
+    /// - Parameters:
+    ///   - par: key是 images ，value是 UIImage
+    ///   - urlStr: 上传路径
+    ///   - finished: 回调
     func upload(par: [String: Any] , urlStr: String, finished: @escaping networkJSON) {
         
         let ready = readySendRequest(urlStr: urlStr)
