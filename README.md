@@ -32,8 +32,8 @@
 * `pod`导入
 	
 ```
-pod 'Alamofire', '~> 4.3'
-pod 'SwiftyJSON', '~> 3.1.4'  
+pod 'Alamofire', '~> 4.7.2'
+pod 'SwiftyJSON', '~> 4.1.0'  
 ```
 
 * 在项目的Build Settings里配置Swift Compiler - Custom Flags，展开Other Swift Flags，在Debug右侧输入`-D DEBUG`
