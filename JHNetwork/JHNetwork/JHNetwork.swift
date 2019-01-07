@@ -116,66 +116,66 @@ extension JHNetwork {
     
     //MARK:缓存GET
     @discardableResult
-    func getForJSON(url: String, finished: @escaping networkJSON) -> Cancellable? {
-        return getForJSON(url: url, parameters: nil, finished: finished)
+    func getForJSON(url: String, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return getForJSON(url: url, parameters: nil, remark: remark, finished: finished)
     }
     
     @discardableResult
-    func getForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
-        return getForJSON(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    func getForJSON(url: String, parameters: [String :Any]?, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return getForJSON(url: url, refreshCache: true, parameters: parameters, remark: remark, finished: finished)
     }
     
     @discardableResult
-    func getForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
-        return requestJSON(methodType: .get, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
+    func getForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return requestJSON(methodType: .get, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, remark: remark, finished: finished)
     }
     
     //MARK:不缓存GET
     @discardableResult
-    func getNoCacheForJSON(url: String, finished: @escaping networkJSON) -> Cancellable? {
-        return getNoCacheForJSON(url: url, parameters: nil, finished: finished)
+    func getNoCacheForJSON(url: String, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return getNoCacheForJSON(url: url, parameters: nil, remark: remark, finished: finished)
     }
     
     @discardableResult
-    func getNoCacheForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
-        return getNoCacheForJSON(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    func getNoCacheForJSON(url: String, parameters: [String :Any]?, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return getNoCacheForJSON(url: url, refreshCache: true, parameters: parameters, remark: remark, finished: finished)
     }
     
     @discardableResult
-    func getNoCacheForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
-        return requestJSON(methodType: .get, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, finished: finished)
+    func getNoCacheForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return requestJSON(methodType: .get, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, remark: remark, finished: finished)
     }
     
     //MARK:缓存POST
     @discardableResult
-    func postForJSON(url: String, finished: @escaping networkJSON) -> Cancellable? {
-        return postForJSON(url: url, parameters: nil, finished: finished)
+    func postForJSON(url: String, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return postForJSON(url: url, parameters: nil, remark: remark, finished: finished)
     }
     
     @discardableResult
-    func postForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
-        return postForJSON(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    func postForJSON(url: String, parameters: [String :Any]?, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return postForJSON(url: url, refreshCache: true, parameters: parameters, remark: remark, finished: finished)
     }
     
     @discardableResult
-    func postForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
-        return requestJSON(methodType: .post, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, finished: finished)
+    func postForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return requestJSON(methodType: .post, urlStr: url, refreshCache: refreshCache, isCache: true, parameters: parameters, remark: remark, finished: finished)
     }
     
     //MARK:不缓存POST
     @discardableResult
-    func postNoCacheForJSON(url: String, finished: @escaping networkJSON) -> Cancellable? {
-        return postNoCacheForJSON(url: url, parameters: nil, finished: finished)
+    func postNoCacheForJSON(url: String, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return postNoCacheForJSON(url: url, parameters: nil, remark: remark, finished: finished)
     }
     
     @discardableResult
-    func postNoCacheForJSON(url: String, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
-        return postNoCacheForJSON(url: url, refreshCache: true, parameters: parameters, finished: finished)
+    func postNoCacheForJSON(url: String, parameters: [String :Any]?, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return postNoCacheForJSON(url: url, refreshCache: true, parameters: parameters, remark: remark, finished: finished)
     }
     
     @discardableResult
-    func postNoCacheForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
-        return requestJSON(methodType: .post, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, finished: finished)
+    func postNoCacheForJSON(url: String, refreshCache: Bool, parameters: [String :Any]?, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
+        return requestJSON(methodType: .post, urlStr: url, refreshCache: refreshCache, isCache: false, parameters: parameters, remark: remark, finished: finished)
     }
     
     //MARK:请求JSON数据最底层
@@ -190,7 +190,7 @@ extension JHNetwork {
     ///   - parameters: 参数字典
     ///   - finished: 回调
     @discardableResult
-    func requestJSON(methodType: HTTPMethod, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, finished: @escaping networkJSON) -> Cancellable? {
+    func requestJSON(methodType: HTTPMethod, urlStr: String, refreshCache: Bool, isCache:Bool, parameters: [String :Any]?, remark: String? = nil, finished: @escaping networkJSON) -> Cancellable? {
         
         let ready = readySendRequest(urlStr: urlStr)
         if ready.0 == false {
@@ -199,7 +199,11 @@ extension JHNetwork {
         let absolute = ready.1
         let param: [String: Any] = appendDefaultParameter(params: parameters) ?? [:]
         if isDebug {
-            WLog("开始请求 🌏 \(absolute.orNil) \n开始请求 🌏 params ==>> \(String(describing: param)) \n开始请求 🌏 Method: \(methodType.rawValue)")
+            if remark.orNil.isEmpty {
+                WLog("开始请求 🌏 \(absolute.orNil) \n开始请求 🌏 params ==>> \(String(describing: param)) \n开始请求 🌏 Method: \(methodType.rawValue)")
+            } else {
+                WLog("开始请求 🌏 \(absolute.orNil) \n开始请求 🌏 \(remark.orNil) Method: \(methodType.rawValue)\n开始请求 🌏 params ==>> \(String(describing: param))")
+            }
         }
         //开始业务判断
         if isCache {
@@ -210,7 +214,7 @@ extension JHNetwork {
                         if isDebug {
                             WLog("🇨🇳因为无网络连接而读取缓存")
                         }
-                        networkLogSuccess(json: js, url: urlStr, params: parameters)
+                        networkLogSuccess(json: js, url: urlStr, params: parameters, remark: remark)
                         finished(js, nil)
                         return nil
                     }
@@ -223,7 +227,7 @@ extension JHNetwork {
                     if isDebug {
                         WLog("🇨🇳因为不刷新缓存而读取缓存")
                     }
-                    networkLogSuccess(json: js, url: urlStr, params: parameters)
+                    networkLogSuccess(json: js, url: urlStr, params: parameters, remark: remark)
                     finished(js, nil)
                     return nil
                 }
@@ -239,7 +243,7 @@ extension JHNetwork {
                 if refreshCache && isCache {
                     self.cacheResponse(response: js, url: urlStr, parameters: parameters)
                 }
-                self.networkLogSuccess(json: js, url: urlStr, params: parameters)
+                self.networkLogSuccess(json: js, url: urlStr, params: parameters, remark: remark)
                 finished(js, nil)
             } else {
                 let error = response.result.error as NSError?
@@ -249,14 +253,14 @@ extension JHNetwork {
                         if self.isDebug {
                             WLog("🇨🇳因为\(String(describing: error))而读取缓存")
                         }
-                        self.networkLogSuccess(json: js, url: urlStr, params: parameters)
+                        self.networkLogSuccess(json: js, url: urlStr, params: parameters, remark: remark)
                         finished(js, nil)
                     } else {
-                        self.networkLogFail(error: error, url: urlStr, params: parameters)
+                        self.networkLogFail(error: error, url: urlStr, params: parameters, remark: remark)
                         finished(nil, error)
                     }
                 } else {
-                    self.networkLogFail(error: error, url: urlStr, params: parameters)
+                    self.networkLogFail(error: error, url: urlStr, params: parameters, remark: remark)
                     finished(nil, error)
                 }
             }
@@ -318,11 +322,11 @@ extension JHNetwork {
                     if resp.result.isSuccess {
                         let value = resp.result.value as Any?
                         let js = JSON(value as Any)
-                        self.networkLogSuccess(json: js, url: urlStr, params: nil)
+                        self.networkLogSuccess(json: js, url: urlStr, params: nil, remark: nil)
                         finished(js, nil)
                     } else {
                         let error = resp.result.error as NSError?
-                        self.networkLogFail(error: error, url: urlStr, params: nil)
+                        self.networkLogFail(error: error, url: urlStr, params: nil, remark: nil)
                         finished(nil, error)
                     }
                 })
@@ -428,11 +432,15 @@ extension JHNetwork {
     ///   - json: 成功的回调
     ///   - url: 接口
     ///   - params: 参数
-    private func networkLogSuccess(json: JSON?, url: String, params: [String:Any]?) {
+    private func networkLogSuccess(json: JSON?, url: String, params: [String:Any]?, remark: String?) {
         if isDebug {
             let absolute = absoluteUrl(path: url)
             let param: [String: Any] = appendDefaultParameter(params: params) ?? [:]
-            WLog("请求成功🍎, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \nresponse ==>> \(String(describing: json ?? JSON()))")
+            if remark.orNil.isEmpty {
+                WLog("请求成功🍎, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \nresponse ==>> \(String(describing: json ?? JSON()))")
+            } else {
+                WLog("请求成功🍎, 🌏 \(absolute) \nremark:\(remark.orNil)\nparams ==>> \(String(describing: param)) \nresponse ==>> \(String(describing: json ?? JSON()))")
+            }
         }
     }
     
@@ -443,14 +451,20 @@ extension JHNetwork {
     ///   - error: 失败信息
     ///   - url: 接口信息
     ///   - params: 参数字典
-    private func networkLogFail(error: NSError?, url: String, params: [String:Any]?) {
+    private func networkLogFail(error: NSError?, url: String, params: [String:Any]?, remark: String?) {
         if isDebug {
             let absolute = absoluteUrl(path: url)
             let param: [String: Any] = appendDefaultParameter(params: params) ?? [:]
             if error?.code == NSURLErrorCancelled {
-                WLog("请求被取消🏠, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error))")
+                if remark.orNil.isEmpty {
+                    WLog("请求被取消🏠, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error?.localizedDescription ?? ""))")
+                } else {
+                    WLog("请求被取消🏠, 🌏 \(absolute) \nremark:\(remark.orNil)\nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error?.localizedDescription ?? ""))")
+                }
+            } else if remark.orNil.isEmpty {
+                WLog("请求错误, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error?.localizedDescription ?? ""))")
             } else {
-                WLog("请求错误, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error))")
+                WLog("请求错误, 🌏 \(absolute) \nremark:\(remark.orNil)\nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error?.localizedDescription ?? ""))")
             }
         }
     }

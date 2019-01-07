@@ -16,11 +16,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        test2()
+        test7()
     }
     
     func test7() {
-        let task = JHNetwork.shared.requestJSON(methodType: .post, urlStr: url2, refreshCache: true, isCache: true, parameters: nil) { (js, erro) in
+        let p = ["OS": "iOS", "version": "1.0"]
+        let task = JHNetwork.shared.requestJSON(methodType: .post, urlStr: url2, refreshCache: true, isCache: true, parameters: p, remark: "测试一下") { (js, erro) in
             
         }
         task?.cancel()
@@ -29,9 +30,7 @@ class ViewController: UIViewController {
     
     
     func test6() {
-        _ = JHNetwork.shared.getForJSON(url: "http://www.baidu.com") { (js, error) in
-            
-        }
+        JHNetwork.shared.getForJSON(url: "http://www.baidu.com", remark: "百度一下") { _,_ in }
     }
     
     func test5() {
