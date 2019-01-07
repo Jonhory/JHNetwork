@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     }
     
     func test7() {
-        let task = JHNetwork.shared.requestJSON(methodType: .POST, urlStr: url2, refreshCache: true, isCache: true, parameters: nil) { (js, erro) in
+        let task = JHNetwork.shared.requestJSON(methodType: .post, urlStr: url2, refreshCache: true, isCache: true, parameters: nil) { (js, erro) in
             
         }
         task?.cancel()
