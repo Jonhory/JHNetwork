@@ -7,83 +7,85 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
     let url2 = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=218.4.255.255"
     let url3 = "https://www.sojson.com"
     
+    lazy var respLab: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "准备请求中"
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 20)
+        label.frame = CGRect(x: 0, y: 0, width: 300, height: 200)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var remarkLab: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "点击屏幕重新发起请求"
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.frame = CGRect(x: 0, y: 0, width: 300, height: 200)
+        label.textAlignment = .center
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .green
         
-        test7()
-    }
-    
-    func test7() {
-        let p = ["OS": "iOS", "version": "1.0"]
-        let task = JHNetwork.shared.requestJSON(methodType: .post, urlStr: url2, refreshCache: true, isCache: true, parameters: p, remark: "测试一下") { (js, erro) in
-            
-        }
-        task?.cancel()
-    }
-    
-    
-    
-    func test6() {
-        JHNetwork.shared.getForJSON(url: "http://www.baidu.com", remark: "百度一下") { _,_ in }
-    }
-    
-    func test5() {
-        JHNetwork.shared.clearCaches()
-    }
-    
-    func test4() {
-        WLog(JHNetwork.shared.totalCacheSize())
-    }
-    
-    func test3() {
-        var params: [String: Any]? = [:]
-        params?["haha"] = [1,2,3,4]
-        params?["nihao"] = "jjj"
-        params?["hehe"] = [:]
+//        JHNetwork.shared.clearCaches()
+        let c = JHNetwork.shared.totalCacheSize()
+        WLog("缓存大小:\(c)B")
         
-        _ = JHNetwork.shared.getCacheForJSON(url: url2, parameters: params) { (js, _) in
-            
-        }
+        view.addSubview(respLab)
+        respLab.center = view.center
         
-//        JHNetwork.shared.getCacheForJSON(url: url2, parameters: params) { print($0) }
-    }
-    
-    func test2() {
-        JHNetwork.shared.baseUrl = url3
-        let par: [String: Any]? = [:]
+        view.addSubview(remarkLab)
+        remarkLab.center = CGPoint(x: view.center.x, y: view.center.y - 100)
+        
         JHNetwork.shared.encodeAble = true
-        _ = JHNetwork.shared.getNoCacheForJSON(url: "/open/api/weather/json.shtml?city=北京", parameters: par) { (re, er) in
-            if er != nil {
-                print("error = \(String(describing: er!))")
-            }else{
-                print("response = \(String(describing: re ?? "nil resp"))")
-            }
-        }
+        
+        test1()
     }
     
-    var i = 0
     
     func test1() {
-        JHNetwork.shared.baseUrl = "http://int.dpool.sina.com.cn"
+        let url = "http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=关键字&bk_length=600"
+//        let url2 = "http://api.map.baidu.com/telematics/v3/weather?location=嘉兴&output=json&ak=5slgyqGDENN7Sy7pw29IUvrZ"
         
-        
-        _ = JHNetwork.shared.getForJSON(url: url2, refreshCache: true, parameters: nil) { (result, error) in
-            if self.i < 2 {
-                self.i += 1
-                self.test1()
+        JHNetwork.shared.request(methodType: .get,
+                                 urlStr: url,
+                                 refreshCache: true,
+                                 isCache: true,
+                                 parameters: nil,
+                                 of: DemoResp.self,
+                                 codeHandler: false) {[weak self] result, error in
+            guard let self = self else { return }
+//            WLog("请求✅ \(result) error=\(error)")
+            if let result = result {
+                if let errno = result.errno {
+                    self.respLab.text = "请求完成 ❌ errno:\(errno)"
+                } else {
+                    self.respLab.text = "请求完成 ✅\n\(result.desc ?? "")"
+                }
+            } else {
+                self.respLab.text = "请求完成 ❌ \(error ?? "")"
             }
         }
-        
-//        JHNetwork.shared.getForJSON(url: url2, refreshCache: true, parameters: ["name":"jj"]) { (result, error) in
-//        }
-        
-        JHNetwork.shared.shoulObtainLocalWhenUnconnected(shouldObtain: false)
+//        JHNetwork.shared.requestCodable(methodType: .get, urlStr: url, refreshCache: false, isCache: false, parameters: nil, of: DemoResp.self, finished: { result, error in
+//            WLog("请求✅ \(result)")
+//        })
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        test1()
     }
 
     override func didReceiveMemoryWarning() {
