@@ -1,4 +1,4 @@
-# Swift4.1网络层封装
+# `Swift5`网络层封装
 
 ## 导航
 * [介绍](#介绍)
@@ -7,9 +7,9 @@
 * [代码示例](#代码示例)
 
 ## <a id="介绍"></a> 介绍:
-* 使用Swift4.1，基于[Alamofire4.0+](https://github.com/Alamofire/Alamofire)、[SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)封装的网络中间层，提供快速缓存策略，帮助日常开发。
+* 使用`Swift5`，基于[Alamofire5.6.4+](https://github.com/Alamofire/Alamofire)、`Codable`封装的网络中间层，提供快速缓存策略，帮助日常开发。
 * 实现了GET／POST请求JSON数据，可定义每一个请求是否缓存成功的回调数据。
-* 利用请求的url拼接传入的参数字典，形成唯一性的字符串，经过MD5加密后保存至`Library/Caches/JHNetworkCaches`文件夹，该路径可自行修改。
+* 利用请求的url拼接传入的参数字典，形成唯一性的字符串，经过`SHA256`加密后保存至`Library/Caches/JHNetworkCaches`文件夹，该路径可自行修改。
 * 当调用一个请求方法时，会经过以下逻辑判断处理：
 
 	1. 判断`shoulObtainLocalWhenUnconnected`(网络异常时是否返回缓存数据)
@@ -18,7 +18,7 @@
 	4. 判断`refreshCache`(是否刷新缓存)
 	5. 若第5点为否，则尝试获取缓存，若有缓存，则返回**成功**的回调
 	6. 正式开始发起网络请求
-	7. 成功回调的处理，利用`SwiftyJSON`解析
+	7. 成功回调的处理，利用`Alamofire responseDecodable`解析
 		* 如果`refreshCache`(是否刷新缓存)且`isCache`(是否缓存),则缓存回调数据
 		* 返回**成功**的回调
 		
@@ -32,13 +32,17 @@
 * `pod`导入
 	
 ```
-pod 'Alamofire', '~> 4.7.2'
-pod 'SwiftyJSON', '~> 4.1.0'  
+pod 'Alamofire', '~> 5.6.4'
 ```
 
-* 在项目的Build Settings里配置Swift Compiler - Custom Flags，展开Other Swift Flags，在Debug右侧输入`-D DEBUG`
+* 在项目的Build Settings里配置`Swift Compiler - Custom Flags`，展开`Other Swift Flags`，在`Debug`右侧输入`-D DEBUG`
 
 ## <a id="代码示例"></a>代码示例:
+
+* 新建`Model`类，继承 `Codable`修改为继承`BaseResp`即可
+
+* 代码中有 `codeHandler`字段，`data.code != 200 && data.code != 1`里的代码实现部分可根据实际情况调整
+
 * 如果想在网络状态异常时返回缓存数据，可以在`AppDelegate.swift`中设置
 
 ```
@@ -128,7 +132,7 @@ totalCacheSize()
 clearCaches()
 ```
 
-## 灵感
+## 感谢
 * 灵感来自于[HYBNetworking](https://github.com/CoderJackyHuang/HYBNetworking)。
 
 ## 联系我
