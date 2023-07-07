@@ -12,9 +12,10 @@
 		BB7803371E5C735A00A5920B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB7803351E5C735A00A5920B /* Main.storyboard */; };
 		BB7803391E5C735A00A5920B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB7803381E5C735A00A5920B /* Assets.xcassets */; };
 		BB78033C1E5C735A00A5920B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB78033A1E5C735A00A5920B /* LaunchScreen.storyboard */; };
-		BB7803611E5C73E800A5920B /* JHNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803601E5C73E800A5920B /* JHNetwork.swift */; };
+		BB7803611E5C73E800A5920B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7803601E5C73E800A5920B /* Network.swift */; };
 		BB7C8FD61F18A96C0075F795 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7C8FD51F18A96C0075F795 /* star@2x.png */; };
 		BB80C8552A56719900A370AB /* DemoResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB80C8542A56719900A370AB /* DemoResp.swift */; };
+		BBC42CDE2A57B0E300AB8C69 /* NetworkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC42CDD2A57B0E300AB8C69 /* NetworkExtension.swift */; };
 		E316A6943CEBE0BF6CAE9179 /* Pods_JHNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8039C95E33E4C812C80851F4 /* Pods_JHNetwork.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,10 +64,11 @@
 		BB78033D1E5C735A00A5920B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB7803421E5C735A00A5920B /* JHNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JHNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB78034D1E5C735A00A5920B /* JHNetworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JHNetworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB7803601E5C73E800A5920B /* JHNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHNetwork.swift; sourceTree = "<group>"; };
+		BB7803601E5C73E800A5920B /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		BB7803641E5C812600A5920B /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		BB7C8FD51F18A96C0075F795 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		BB80C8542A56719900A370AB /* DemoResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoResp.swift; sourceTree = "<group>"; };
+		BBC42CDD2A57B0E300AB8C69 /* NetworkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtension.swift; sourceTree = "<group>"; };
 		D0FCCE5716EC05AE1880E983 /* Pods_JHNetworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JHNetworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,7 +130,7 @@
 		BB7803301E5C735A00A5920B /* JHNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				BB78035F1E5C73DD00A5920B /* JHNetwork */,
+				BB78035F1E5C73DD00A5920B /* Network */,
 				BB7803311E5C735A00A5920B /* AppDelegate.swift */,
 				BB7803331E5C735A00A5920B /* ViewController.swift */,
 				BB80C8542A56719900A370AB /* DemoResp.swift */,
@@ -142,12 +144,13 @@
 			path = JHNetwork;
 			sourceTree = "<group>";
 		};
-		BB78035F1E5C73DD00A5920B /* JHNetwork */ = {
+		BB78035F1E5C73DD00A5920B /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				BB7803601E5C73E800A5920B /* JHNetwork.swift */,
+				BB7803601E5C73E800A5920B /* Network.swift */,
+				BBC42CDD2A57B0E300AB8C69 /* NetworkExtension.swift */,
 			);
-			path = JHNetwork;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		D3E3CD2753B2AA2BE50FA33A /* Frameworks */ = {
@@ -341,7 +344,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB7803341E5C735A00A5920B /* ViewController.swift in Sources */,
-				BB7803611E5C73E800A5920B /* JHNetwork.swift in Sources */,
+				BBC42CDE2A57B0E300AB8C69 /* NetworkExtension.swift in Sources */,
+				BB7803611E5C73E800A5920B /* Network.swift in Sources */,
 				BB7803321E5C735A00A5920B /* AppDelegate.swift in Sources */,
 				BB80C8552A56719900A370AB /* DemoResp.swift in Sources */,
 			);
@@ -516,7 +520,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 3HP62AD64L;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = JHNetwork/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -539,7 +543,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 3HP62AD64L;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = JHNetwork/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

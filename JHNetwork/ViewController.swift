@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .green
         
 //        JHNetwork.shared.clearCaches()
-        let c = JHNetwork.shared.totalCacheSize()
+        let c = Network.shared.totalCacheSize()
         WLog("缓存大小:\(c)B")
         
         view.addSubview(respLab)
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         view.addSubview(remarkLab)
         remarkLab.center = CGPoint(x: view.center.x, y: view.center.y - 100)
         
-        JHNetwork.shared.encodeAble = true
+        Network.shared.encodeAble = true
         
         test1()
     }
@@ -60,13 +60,14 @@ class ViewController: UIViewController {
         let url = "http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=关键字&bk_length=600"
 //        let url2 = "http://api.map.baidu.com/telematics/v3/weather?location=嘉兴&output=json&ak=5slgyqGDENN7Sy7pw29IUvrZ"
         
-        JHNetwork.shared.request(methodType: .get,
+        Network.shared.request(methodType: .get,
                                  urlStr: url,
                                  refreshCache: true,
                                  isCache: true,
                                  parameters: nil,
                                  of: DemoResp.self,
-                                 codeHandler: false) {[weak self] result, error in
+                                 codeHandler: false
+        ) {[weak self] result, error in
             guard let self = self else { return }
 //            WLog("请求✅ \(result) error=\(error)")
             if let result = result {
