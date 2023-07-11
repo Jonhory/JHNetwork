@@ -186,21 +186,25 @@ extension Network {
     ///   - error: 失败信息
     ///   - url: 接口信息
     ///   - params: 参数字典
-    func networkLogFail(error: AFError?, url: String, params: [String: Any]?, remark: String?) {
+    func networkLogFail(error: AFError?, url: String, params: [String: Any]?, remark: String?, statusCode: Int?) {
         if isDebug {
             let absolute = absoluteUrl(path: url)
             let param: [String: Any] = appendDefaultParameter(params: params) ?? [:]
-            if error?.responseCode == NSURLErrorCancelled {
-                if remark.orNil.isEmpty {
-                    WLog("请求被取消🏠, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error?.localizedDescription ?? ""))")
-                } else {
-                    WLog("请求被取消🏠, 🌏 \(absolute) \nremark:\(remark.orNil)\nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error?.localizedDescription ?? ""))")
-                }
+            
+            var rowFirst = "请求被取消🏠, 🌏 \(absolute)\n"
+            var rowSecond = "params ==>> \(String(describing: param))\n"
+            var rowThird = "状态码: \(statusCode ?? -1)\n"
+            var rowFourth = "错误信息❌ ==>> \(String(describing: error?.localizedDescription ?? ""))"
+            
+            if error?.responseCode == NSURLErrorCancelled, !remark.orNil.isEmpty {
+                rowFirst = "请求被取消🏠, 🌏 \(absolute) \nremark:\(remark.orNil)\n"
             } else if remark.orNil.isEmpty {
-                WLog("请求错误, 🌏 \(absolute) \nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error?.localizedDescription ?? ""))")
+                rowFirst = "请求错误, 🌏 \(absolute) \n"
             } else {
-                WLog("请求错误, 🌏 \(absolute) \nremark:\(remark.orNil)\nparams ==>> \(String(describing: param)) \n错误信息❌ ==>> \(String(describing: error?.localizedDescription ?? ""))")
+                rowFirst = "请求错误, 🌏 \(absolute) \nremark:\(remark.orNil)\n"
             }
+            
+            WLog(rowFirst + rowSecond + rowThird + rowFourth)
         }
     }
     
@@ -354,6 +358,6 @@ extension Network {
     ///
     /// - Returns: 文件夹路径
     func cachePath() -> String {
-        return NSHomeDirectory().appending("/Library/Caches/JHNetworkCaches")
+        return NSHomeDirectory().appending("/Library/Caches/NetworkCaches")
     }
 }

@@ -224,7 +224,7 @@ extension Network {
                     finished(js, nil)
                     return
                 }
-                self.networkLogFail(error: error, url: urlStr, params: param, remark: remark)
+                self.networkLogFail(error: error, url: urlStr, params: param, remark: remark, statusCode: resp.response?.statusCode)
                 finished(nil, error.localizedDescription)
                 
             } else {
@@ -308,7 +308,7 @@ extension Network {
             guard let self = self else { return }
             
             if let error: AFError = resp.error {
-                self.networkLogFail(error: error, url: urlStr, params: param, remark: remark)
+                self.networkLogFail(error: error, url: urlStr, params: param, remark: remark, statusCode: resp.response?.statusCode)
                 finished(nil, error.localizedDescription)
                 
             } else {
